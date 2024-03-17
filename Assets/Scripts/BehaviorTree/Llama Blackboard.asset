@@ -1,0 +1,267 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5037926738246716614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: CanSpit
+  m_EditorClassIdentifier: 
+  category: Spit
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &-4841085966958221756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: IsInMeleeRange
+  m_EditorClassIdentifier: 
+  category: Attack
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &-3278296893692978447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c25e407b7ce80ad48afc03654956a1b0, type: 3}
+  m_Name: Self
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {fileID: 0}
+--- !u!114 &-1435277074023994719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: CanRoll
+  m_EditorClassIdentifier: 
+  category: Roll
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3a71c596e8b0944b909bbf44cf66c50, type: 3}
+  m_Name: Llama Blackboard
+  m_EditorClassIdentifier: 
+  keys:
+  - {fileID: -3278296893692978447}
+  - {fileID: -4841085966958221756}
+  - {fileID: 4145498166170747336}
+  - {fileID: 2165561317623926394}
+  - {fileID: 174757854020828709}
+  - {fileID: -5037926738246716614}
+  - {fileID: 1578295508885065229}
+  - {fileID: -1435277074023994719}
+  - {fileID: 7927665357419831920}
+  - {fileID: 6658620656013744982}
+  - {fileID: 4485206502091006450}
+  - {fileID: 6683238979471402677}
+  - {fileID: 3904323919314663040}
+  parent: {fileID: 0}
+--- !u!114 &174757854020828709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: CanMelee
+  m_EditorClassIdentifier: 
+  category: Attack
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &1578295508885065229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: IsInChaseRange
+  m_EditorClassIdentifier: 
+  category: Movement
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &2165561317623926394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: CanBounce
+  m_EditorClassIdentifier: 
+  category: Bounce
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &3904323919314663040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81988d2f5a5807241b45a076853c02f1, type: 3}
+  m_Name: LocationOnGround
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {x: 0, y: 0, z: 0}
+--- !u!114 &4145498166170747336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: IsInSpitRange
+  m_EditorClassIdentifier: 
+  category: Spit
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &4485206502091006450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b97a1cab3e25e246a1321c1c6515ce3, type: 3}
+  m_Name: BoolKey
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: 0
+--- !u!114 &4601095376036165151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81988d2f5a5807241b45a076853c02f1, type: 3}
+  m_Name: Location1
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {x: 0, y: 0, z: 0}
+--- !u!114 &6658620656013744982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c717f2aa08147478edeef178e4461d, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {fileID: 0}
+--- !u!114 &6683238979471402677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81988d2f5a5807241b45a076853c02f1, type: 3}
+  m_Name: Location
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {x: 0, y: 0, z: 0}
+--- !u!114 &7927665357419831920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72fbaec49b8225645904ab749fbd5295, type: 3}
+  m_Name: Forward
+  m_EditorClassIdentifier: 
+  category: 
+  description: 
+  sync: 0
+  isLocal: 0
+  value: {x: 0, y: 0, z: 0, w: 0}
