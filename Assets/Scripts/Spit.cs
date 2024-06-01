@@ -45,7 +45,7 @@ namespace LlamAcademy
         private void OnDisable()
         {
             Rigidbody.angularVelocity = Vector3.zero;
-            Rigidbody.velocity = Vector3.zero;
+            Rigidbody.linearVelocity = Vector3.zero;
         }
 
         private void OnTriggerEnter(Collider other)
