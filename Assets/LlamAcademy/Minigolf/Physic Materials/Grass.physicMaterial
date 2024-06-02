@@ -8,8 +8,8 @@ PhysicsMaterial:
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass
   serializedVersion: 2
-  m_DynamicFriction: 0.3
-  m_StaticFriction: 0.3
-  m_Bounciness: 0.25
+  m_DynamicFriction: 1
+  m_StaticFriction: 1
+  m_Bounciness: 0.6
   m_FrictionCombine: 0
   m_BounceCombine: 0

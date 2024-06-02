@@ -1,10 +1,11 @@
 {
     "name": "LlamAcademy.Minigolf",
-    "rootNamespace": "LlamAcademy.Minigolf",
+    "rootNamespace": "",
     "references": [
         "GUID:4307f53044263cf4b835bd812fc161a4",
         "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:613783dc1674e844b87788ea74ede0f6"
+        "GUID:613783dc1674e844b87788ea74ede0f6",
+        "GUID:77ccaf49895b0d64e87cd4b4faf83c49"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

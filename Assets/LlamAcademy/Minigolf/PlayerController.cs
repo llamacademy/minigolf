@@ -15,7 +15,6 @@ namespace LlamAcademy.Minigolf
         [SerializeField] private Gradient PowerGradient;
         [SerializeField] private CinemachineInputProvider RotationInputProvider;
 
-
         private Camera Camera;
         private int Putts = 0;
         private Vector2 InitialTouchPosition;
@@ -29,7 +28,7 @@ namespace LlamAcademy.Minigolf
         private void Start()
         {
             // these need testing
-            // TouchSimulation.Enable();
+            // TouchSimulation.Enable(); apparently doesn't work in Unity 6, but with monobehavior it does
             EnhancedTouchSupport.Enable();
             Touch.onFingerDown += TouchOnFingerDown;
             Touch.onFingerMove += TouchOnFingerMove;

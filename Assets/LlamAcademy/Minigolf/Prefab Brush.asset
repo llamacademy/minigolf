@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Prefab Brush
   m_EditorClassIdentifier: 
   m_Cells:
-  - m_GameObject: {fileID: 6736398665368235343, guid: 9664cbb35a5aa6b439c05834529b47c5, type: 3}
-    m_Offset: {x: 0, y: -0.25, z: 0}
+  - m_GameObject: {fileID: 5392101364679144812, guid: 38e908e5df576f34386af68e8330c538, type: 3}
+    m_Offset: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     m_Orientation: {x: 0, y: 0, z: 0, w: 1}
   m_Size: {x: 1, y: 1, z: 1}
