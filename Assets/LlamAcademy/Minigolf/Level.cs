@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LlamAcademy.Minigolf.Editor
+namespace LlamAcademy.Minigolf
 {
     public class Level : ScriptableObject
     {

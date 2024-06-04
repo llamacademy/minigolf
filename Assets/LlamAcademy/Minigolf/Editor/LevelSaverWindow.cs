@@ -73,11 +73,11 @@ namespace LlamAcademy.Minigolf.Editor
         {
             if (FileExistsAtDirectory(fileName))
             {
-                DuplicateFileWarning.AddToClassList("hidden");
+                DuplicateFileWarning.RemoveFromClassList("hidden");
             }
             else
             {
-                DuplicateFileWarning.RemoveFromClassList("hidden");
+                DuplicateFileWarning.AddToClassList("hidden");
             }
 
             if (Directory.Exists(directory))
@@ -111,7 +111,7 @@ namespace LlamAcademy.Minigolf.Editor
             Bounds bounds = new();
             bool isFirstChild = true;
 
-            foreach (Transform child in Grid.transform)
+            foreach (Transform child in Tilemap.transform)
             {
                 if (child.TryGetComponent(out Renderer renderer) && renderer is not TilemapRenderer)
                 {
@@ -168,11 +168,9 @@ namespace LlamAcademy.Minigolf.Editor
         private void SaveToFile(ClickEvent _)
         {
             FindTilemap();
-            GameObject grid = (GameObject)TilesetField.value;
-            Tilemap tilemap = grid.transform.GetChild(0).GetComponent<Tilemap>();
 
             List<PrefabSpawnData> saveData = new();
-            foreach (Transform child in Grid.transform)
+            foreach (Transform child in Tilemap.transform)
             {
                 if (child.TryGetComponent(out Renderer renderer) && renderer is not TilemapRenderer)
                 {
@@ -184,10 +182,10 @@ namespace LlamAcademy.Minigolf.Editor
                     {
                         Object prefabSource = PrefabUtility.GetCorrespondingObjectFromSource(child.gameObject);
                         string path = AssetDatabase.GetAssetPath(prefabSource);
-                        string resourcesPath = path[path.IndexOf("Resources/")..];
-                        resourcesPath = resourcesPath.TrimStart("Resources/".ToCharArray()).TrimEnd(".prefab".ToCharArray());
+                        string resourcesPath = path[(path.IndexOf("Resources/") + 10)..];// trim full path so we have the "Resources" as the root path
+                        resourcesPath = resourcesPath.Substring(0, resourcesPath.LastIndexOf(".")); // trim .prefab or any other extension
 
-                        saveData.Add(new PrefabSpawnData(resourcesPath, Vector3Int.CeilToInt(child.position), child.rotation));
+                        saveData.Add(new PrefabSpawnData(resourcesPath, child.position, child.rotation));
                     }
                 }
             }
@@ -229,7 +227,36 @@ namespace LlamAcademy.Minigolf.Editor
 
         private void LoadFromFile(ClickEvent _)
         {
+            FindTilemap();
 
+            if (LoadFileField.value == null || Tilemap == null || Grid == null)
+            {
+                Debug.LogError("Unable to load level. Please ensure \"File\" is assigned in the Editor Window and there is a Tilemap and Grid in scene!");
+                return;
+            }
+
+            for (int i = Tilemap.transform.childCount - 1; i > 0; i--)
+            {
+                DestroyImmediate(Tilemap.transform.GetChild(i).gameObject);
+            }
+
+            Level level = LoadFileField.value as Level;
+            Dictionary<string, GameObject> preloadedResources = new();
+            foreach (PrefabSpawnData data in level.WorldObjectPositions)
+            {
+                GameObject prefab = null;
+                if (!preloadedResources.ContainsKey(data.PrefabResourcePath))
+                {
+                    prefab = Resources.Load<GameObject>(data.PrefabResourcePath);
+                }
+                else
+                {
+                    prefab = preloadedResources[data.PrefabResourcePath];
+                }
+
+                GameObject instance = Instantiate(prefab, data.Position, data.Rotation);
+                instance.transform.SetParent(Tilemap.transform, true);
+            }
         }
     }
 }

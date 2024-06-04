@@ -1,8 +1,10 @@
 {
     "name": "LlamAcademy.Minigolf.Editor",
+    "rootNamespace": "",
     "references": [
         "GUID:3a9781db4804a9945b9883f3a7c46d45",
-        "GUID:cbdf09464b6b87745be748a67e5a21a0"
+        "GUID:cbdf09464b6b87745be748a67e5a21a0",
+        "GUID:6bf9a10b70475354b89fff360d94d12d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

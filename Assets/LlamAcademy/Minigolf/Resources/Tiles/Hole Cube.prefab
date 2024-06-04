@@ -5555,7 +5555,7 @@ GameObject:
   - component: {fileID: 5252034511061159778}
   - component: {fileID: 6159377152975630541}
   m_Layer: 0
-  m_Name: Effect
+  m_Name: Win Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
