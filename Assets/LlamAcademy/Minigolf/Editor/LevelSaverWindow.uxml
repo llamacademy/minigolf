@@ -1,0 +1,15 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/Editor/LevelSaverWindow.uss?fileID=7433441132597879392&amp;guid=ae091fc4dd207244bb778994a01cdd0e&amp;type=3#LevelSaverWindow" />
+    <engine:Label text="Missing Tilemap in Scene! Create a TileMap to save/load levels!" name="missing-tilemap" class="error"/>
+    <engine:Button text="Find Tilemap" name="find-tilemap-button" />
+    <engine:TextField label="Save to:" name="directory-input" value="Assets/LlamAcademy/Minigolf/Resources/Levels/" />
+    <engine:Label name="missing-folder-warning" text="Folder does not exist. This will be created on save." class="warning"/>
+    <engine:TextField label="File Name:" placeholder-text="1" name="file-name-input" value="1"/>
+    <engine:Label name="override-file-warning" text="File already exists at this path. Saving will overwrite!" class="warning"/>
+    <engine:Button text="Save To File" name="save-button" />
+    <engine:Label text="Load From Save" class="header" />
+    <editor:ObjectField name="load-file-field" label="File" />
+    <engine:Button text="Load File" name="load-button" />
+    <engine:Label text="Warning: Loading the file will destroy any scene changes!" class="warning" />
+    <editor:ObjectField name="tile-palette" label="Tileset" />
+</engine:UXML>

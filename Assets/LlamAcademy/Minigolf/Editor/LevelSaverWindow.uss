@@ -1,0 +1,30 @@
+.hidden {
+    display: none;
+}
+
+.warning {
+    color: #cccc00;
+    font-size: 16px;
+    padding: 6px;
+    background-color: #222222;
+    border-color: #000000;
+    border-radius: 4px;
+}
+.error {
+    color: #cc0000;
+    font-size: 16px;
+    padding: 6px;
+    background-color: #222222;
+    border-color: #000000;
+    border-radius: 4px;
+}
+
+.header {
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+Button {
+    flex-grow: 0;
+    align-self: flex-end;
+}
