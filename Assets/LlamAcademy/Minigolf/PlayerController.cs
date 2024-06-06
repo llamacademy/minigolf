@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
@@ -33,6 +34,13 @@ namespace LlamAcademy.Minigolf
             Touch.onFingerDown += TouchOnFingerDown;
             Touch.onFingerMove += TouchOnFingerMove;
             Touch.onFingerUp += TouchOnFingerUp;
+        }
+
+        private void OnDisable()
+        {
+            Touch.onFingerDown -= TouchOnFingerDown;
+            Touch.onFingerMove -= TouchOnFingerMove;
+            Touch.onFingerUp -= TouchOnFingerUp;
         }
 
         private void TouchOnFingerUp(Finger finger)

@@ -9,7 +9,9 @@
     <engine:Button text="Save To File" name="save-button" />
     <engine:Label text="Load From Save" class="header" />
     <editor:ObjectField name="load-file-field" label="File" type="LlamAcademy.Minigolf.Level, LlamAcademy.Minigolf" />
-    <engine:Button text="Load File" name="load-button" />
-    <engine:Label text="Warning: Loading the file will destroy any scene changes!" class="warning" />
-    <editor:ObjectField name="tile-palette" label="Tileset" />
+    <engine:VisualElement class="flex-row flex-wrap space-between warning">
+        <engine:Label text="Warning: Loading the file will destroy any scene changes!" />
+        <engine:Button text="Load File" name="load-button" class="pull-right" />
+    </engine:VisualElement>
+    <engine:Button text="Clear Tilemap" name="clear-button" class="warning-button" />
 </engine:UXML>

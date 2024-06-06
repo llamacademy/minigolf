@@ -19,10 +19,10 @@ namespace LlamAcademy.Minigolf.Editor
         private Label DuplicateFileWarning => rootVisualElement.Q<Label>("override-file-warning");
         private Label MissingFolderWarning => rootVisualElement.Q<Label>("missing-folder-warning");
         private ObjectField LoadFileField => rootVisualElement.Q<ObjectField>("load-file-field");
-        private ObjectField TilesetField => rootVisualElement.Q<ObjectField>("tile-palette");
         private Button SaveButton => rootVisualElement.Q<Button>("save-button");
         private Button FindTilemapButton => rootVisualElement.Q<Button>("find-tilemap-button");
         private Button LoadButton => rootVisualElement.Q<Button>("load-button");
+        private Button ClearTilemapButton => rootVisualElement.Q<Button>("clear-button");
 
         //Save values on domain reload
         [SerializeField] private Object tilesetValue;
@@ -48,15 +48,25 @@ namespace LlamAcademy.Minigolf.Editor
 
             SaveButton.RegisterCallback<ClickEvent>(SaveToFile);
             LoadButton.RegisterCallback<ClickEvent>(LoadFromFile);
+            ClearTilemapButton.RegisterCallback<ClickEvent>(ClearTilemap);
             FileNameInput.RegisterValueChangedCallback(HandleFileUpdate);
             DirectoryInput.RegisterValueChangedCallback(HandleDirectoryUpdate);
 
-            TilesetField.value = tilesetValue;
             LoadFileField.value = loadFileValue;
             FileNameInput.value = fileName;
             DirectoryInput.value = directoryPath;
 
             FindTilemap();
+        }
+
+        private void ClearTilemap(ClickEvent evt)
+        {
+            FindTilemap();
+
+            for (int i = Tilemap.transform.childCount - 1; i >= 0; i--)
+            {
+                DestroyImmediate(Tilemap.transform.GetChild(i).gameObject);
+            }
         }
 
         private void HandleDirectoryUpdate(ChangeEvent<string> evt)
@@ -92,7 +102,6 @@ namespace LlamAcademy.Minigolf.Editor
 
         private void OnDisable()
         {
-            tilesetValue = TilesetField.value;
             loadFileValue = LoadFileField.value;
             fileName = FileNameInput.value;
             directoryPath = DirectoryInput.value;
@@ -185,7 +194,7 @@ namespace LlamAcademy.Minigolf.Editor
                         string resourcesPath = path[(path.IndexOf("Resources/") + 10)..];// trim full path so we have the "Resources" as the root path
                         resourcesPath = resourcesPath.Substring(0, resourcesPath.LastIndexOf(".")); // trim .prefab or any other extension
 
-                        saveData.Add(new PrefabSpawnData(resourcesPath, child.position, child.rotation));
+                        saveData.Add(new PrefabSpawnData(resourcesPath, child.position, child.rotation, child.localScale));
                     }
                 }
             }
@@ -235,10 +244,7 @@ namespace LlamAcademy.Minigolf.Editor
                 return;
             }
 
-            for (int i = Tilemap.transform.childCount - 1; i > 0; i--)
-            {
-                DestroyImmediate(Tilemap.transform.GetChild(i).gameObject);
-            }
+            ClearTilemap(_);
 
             Level level = LoadFileField.value as Level;
             Dictionary<string, GameObject> preloadedResources = new();
@@ -254,8 +260,8 @@ namespace LlamAcademy.Minigolf.Editor
                     prefab = preloadedResources[data.PrefabResourcePath];
                 }
 
-                GameObject instance = Instantiate(prefab, data.Position, data.Rotation);
-                instance.transform.SetParent(Tilemap.transform, true);
+                GameObject instance = Instantiate(prefab, data.Position, data.Rotation, Tilemap.transform);
+                instance.transform.localScale = data.Scale;
             }
         }
     }

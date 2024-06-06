@@ -10,6 +10,24 @@
     border-color: #000000;
     border-radius: 4px;
 }
+
+.warning-button {
+    background-color: #cccc00;
+    color: #000000;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.flex-row {
+    flex-shrink: 0;
+    flex-direction: row;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
 .error {
     color: #cc0000;
     font-size: 16px;
