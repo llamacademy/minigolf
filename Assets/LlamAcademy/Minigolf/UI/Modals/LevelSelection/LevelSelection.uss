@@ -1,0 +1,8 @@
+.header {
+    margin-bottom: 16px;
+    height: 50px;
+}
+
+Label {
+    min-width: 50px;
+}

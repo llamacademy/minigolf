@@ -8,7 +8,7 @@ namespace LlamAcademy.Minigolf
     [RequireComponent(typeof(Collider))]
     public class Hole : MonoBehaviour
     {
-        [SerializeField] private Par[] ScoreTargets;
+        [SerializeField] private Par[] ScoreTargets; // todo: replace with Level SO
         private int StrokeCount;
 
         private int FailingStrokes;
@@ -51,13 +51,6 @@ namespace LlamAcademy.Minigolf
             Par targetPar = ScoreTargets.FirstOrDefault(target => target.Strokes <= StrokeCount);
 
             return targetPar == null ? Rating.Fail : targetPar.Rating;
-        }
-
-        [System.Serializable]
-        public class Par
-        {
-            public Rating Rating;
-            public int Strokes;
         }
     }
 }

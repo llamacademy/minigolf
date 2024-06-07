@@ -16,78 +16,113 @@ MonoBehaviour:
   - PrefabResourcePath: Tiles/All Grass
     Position: {x: -10.5, y: 0, z: 1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/All Grass
     Position: {x: -10.5, y: 0, z: 0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Grass Ramp Forward Variant
     Position: {x: -10.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Grass Ramp Forward Variant
     Position: {x: -10.5, y: 0.5, z: -1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Grass Ramp Forward Variant
     Position: {x: -10.5, y: 1, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/All Grass
     Position: {x: -10.5, y: 1.5, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/All Grass
     Position: {x: -10.5, y: 1.5, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Hole Cube
     Position: {x: -10.5, y: 1.5, z: -5.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left
     Position: {x: -11.5, y: 0, z: 1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left
     Position: {x: -11.5, y: 0, z: 0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left Forward Ramp Variant
     Position: {x: -11.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left Forward Ramp Variant
     Position: {x: -11.5, y: 0.5, z: -1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left Forward Ramp Variant
     Position: {x: -11.5, y: 1, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left
     Position: {x: -11.5, y: 1.5, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left
     Position: {x: -11.5, y: 1.5, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Left
     Position: {x: -11.5, y: 1.5, z: -5.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: -9.5, y: 1.5, z: -5.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: -9.5, y: 1.5, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: -9.5, y: 1.5, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right Forward Ramp Variant
     Position: {x: -9.5, y: 1, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right Forward Ramp Variant
     Position: {x: -9.5, y: 0.5, z: -1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right Forward Ramp Variant
     Position: {x: -9.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: -9.5, y: 0, z: 0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: -9.5, y: 0, z: 1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Front Long Variant
     Position: {x: -10.5, y: 0, z: 2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
   - PrefabResourcePath: Tiles/Wall Back Long Variant
     Position: {x: -10.5, y: 1.5, z: -6.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 0, y: 0, z: 0}
+  Par:
+  - Rating: 3
+    Strokes: 1
+  - Rating: 2
+    Strokes: 2
+  - Rating: 1
+    Strokes: 3
+  - Rating: 0
+    Strokes: 5

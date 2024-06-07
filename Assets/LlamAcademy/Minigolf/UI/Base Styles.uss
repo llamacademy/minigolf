@@ -1,0 +1,148 @@
+:root{
+    --primary: #ff6c00;
+    --primary--dark: #cc5600;
+    --primary--light: #ff8933;
+    --secondary: #dddddd;
+    --secondary--dark: #bbbbbb;
+    --secondary--light: #ffffff;
+    --background: #222222;
+    --background--dark: #000000;
+    --background--light: #444444;
+    --danger: #ac0000;
+    --danger--light: #f00000;
+    --danger--dark: #8a0000;
+    --font-size--large: 36px;
+    --font-size--medium: 24px;
+    --font-size-regular: 18px;
+    --font-size-small: 12px;
+
+    -unity-font-definition: resource("Fonts & Materials/ComicHelvetic_Medium");
+}
+
+Label {
+    color: var(--secondary);
+}
+Button {
+    margin-bottom: 12px;
+    border-radius: 16px;
+    border-width: 8px;
+    font-size: var(--font-size--medium);
+    -unity-font-style: bold;
+}
+
+Button.primary {
+    background-color: var(--primary);
+    border-color: var(--secondary);
+    color: var(--background);
+
+    transition: all 125ms ease-in-out;
+}
+
+Button.primary:active {
+    background-color: var(--primary--dark);
+    border-color: var(--secondary--dark);
+    color: var(--background);
+    transition: all 125ms ease-in-out;
+}
+
+Button.primary:hover:focus {
+    background-color: var(--primary--light);
+    border-color: var(--secondary--light);
+    color: var(--background);
+    transition: all 125ms ease-in-out;
+}
+
+Button.secondary {
+    background-color: var(--background--light);
+    border-color: var(--secondary);
+    color: var(--secondary);
+
+    transition: all 125ms ease-in-out;
+}
+
+Button.secondary:active {
+    background-color: var(--background);
+    border-color: var(--secondary--dark);
+    color: var(--secondary--dark);
+    transition: all 125ms ease-in-out;
+}
+
+Button.secondary:hover:focus {
+    background-color: var(--background--light);
+    border-color: var(--secondary--light);
+    color: var(--secondary--light);
+    transition: all 125ms ease-in-out;
+}
+
+Button.danger {
+    background-color: var(--danger);
+    border-color: var(--secondary);
+    color: var(--secondary);
+
+    transition: all 125ms ease-in-out;
+}
+
+Button.danger:active {
+    background-color: var(--danger--dark);
+    border-color: var(--secondary--dark);
+    color: var(--secondary--dark);
+    transition: all 125ms ease-in-out;
+}
+
+Button.danger:hover:focus {
+    background-color: var(--danger--light);
+    border-color: var(--secondary--light);
+    color: var(--secondary--light);
+    transition: all 125ms ease-in-out;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+
+    background-color: var(--secondary);
+    border-color: var(--background);
+    color: var(--background);
+    border-radius: 50%;
+    border-width: 8px;
+
+    transition: all 125ms ease-in-out;
+
+    -unity-text-align: middle-center;
+}
+
+.close-button:hover:focus {
+    background-color: var(--secondary--light);
+    border-color: var(--background--light);
+    color: var(--background--light);
+    transition: all 125ms ease-in-out;
+}
+
+.close-button:active {
+    background-color: var(--secondary--dark);
+    border-color: var(--background--dark);
+    color: var(--background--dark);
+    transition: all 125ms ease-in-out;
+}
+
+.text-center {
+    -unity-text-align: middle-center;
+}
+
+
+.visible {
+    opacity: 1;
+    scale: 1;
+    transition: opacity ease-in-out 250ms, scale ease-in-out 250ms;
+}
+
+.hidden {
+    opacity: 0;
+    scale: 0;
+
+    transition: all ease-in-out 250ms;
+}

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=60c1de3a44d20fb4c90fe92e9a2976dd&amp;type=3#Main Menu" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:VisualElement name="container" class="container">
+            <ui:Label text="About" name="about-title" class="header" style="min-height: 50px;">
+                <ui:Label text="X" name="close-button" class="close-button" />
+            </ui:Label>
+            <ui:Label text="This project was created by Chris from &lt;b&gt;LlamAcademy&lt;/b&gt; with the intention to teach others by example how to build mechanics for their own games.&#10;As such, It is &lt;b&gt;OPEN SOURCE&lt;/b&gt;, meaning you can download the &lt;b&gt;full Unity Project&lt;/b&gt; on &lt;b&gt;GitHub for free&lt;/b&gt;.&#10;Learn how each feature was implemented, and follow along with a series of tutorials on the &lt;color=#ff6c00&gt;LlamAcademy YouTube Channel&lt;/color&gt;.&#10;&#10;If you got value from this project and want to say thank you, become a YouTube Member or Patreon Supporter!&#10;A special shout out and thank to all of the current supporters!" parse-escape-sequences="true" display-tooltip-when-elided="true" style="white-space: pre-wrap; margin-bottom: 16px; font-size: 18px;" />
+            <ui:VisualElement class="button-row">
+                <ui:Button text="Watch the Tutorials" name="tutorials-button" class="secondary" />
+                <ui:Button text="Get the Code" name="code-button" class="secondary" />
+                <ui:Button text="Become a Supporter" name="patreon-button" class="primary" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

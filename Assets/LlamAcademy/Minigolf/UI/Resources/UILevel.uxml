@@ -1,0 +1,16 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Components/UILevel.uss?fileID=7433441132597879392&amp;guid=7838f1326bff6504b9ee0e18ceeae801&amp;type=3#UILevel" />
+    <engine:VisualElement name="root" class="level">
+        <engine:VisualElement name="titles" style="flex-grow: 1; justify-content: space-between; flex-direction: row; flex-shrink: 0;">
+            <engine:Label text="Level" name="level-title" class="text-center" />
+            <engine:Label text="Best Score" name="score-title" class="text-center" />
+            <engine:Label text="Par" name="par-title" class="text-center" />
+        </engine:VisualElement>
+        <engine:VisualElement name="values" style="flex-direction: row; justify-content: space-between;">
+            <engine:Label name="level" class="text-center" />
+            <engine:Label name="score" class="text-center" />
+            <engine:Label name="par" class="text-center" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
