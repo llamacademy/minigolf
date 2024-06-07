@@ -1,0 +1,120 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using LlamAcademy.Minigolf.MeshSimplifier;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
+
+namespace LlamAcademy.Minigolf
+{
+    public class LevelSpawner : MonoBehaviour
+    {
+        [SerializeField] private CombineAndSimplifyChildren Combiner;
+        [SerializeField] private PlayerController Controller;
+        [SerializeField] private LevelDataSO LevelData;
+        [SerializeField] [Range(0.5f, 5)] private float TotalAnimationTime = 2f;
+        [SerializeField] [Range(0.1f, 5)] private float AnimationSpeed = 1f;
+        [SerializeField] private Rigidbody Ball;
+        [SerializeField] private AnimationCurve AnimateInCurve;
+
+        private Tilemap Tilemap;
+        private Grid Grid;
+
+        private void Awake()
+        {
+            if (LevelData == null || LevelData.Level.Par.Length != 4 || LevelData.Level.WorldObjectPositions.Count == 0)
+            {
+                Debug.LogError($"Level could not be initialized because LevelData was misconfigured! LevelData: {LevelData?.name}: {JsonUtility.ToJson(LevelData?.Level)}");
+                SceneManager.LoadScene(Constants.MAIN_MENU_SCENE_NAME);
+                return;
+            }
+
+            Ball.useGravity = false;
+            Ball.GetComponent<Collider>().enabled = false;
+
+            SetupLevel();
+        }
+
+        private IEnumerator Start()
+        {
+            yield return new WaitForSeconds(TotalAnimationTime + 1 * AnimationSpeed);
+            yield return null;
+            Combiner.Simplify();
+            Ball.useGravity = true;
+            Ball.GetComponent<Collider>().enabled = true;
+            Controller.enabled = true;
+        }
+
+        private void SetupLevel()
+        {
+            FindTilemap();
+            ClearTilemap();
+
+            Dictionary<string, GameObject> preloadedResources = new();
+            int tileCount = LevelData.Level.WorldObjectPositions.Count;
+            float baseDelay = TotalAnimationTime / tileCount;
+            int index = 0;
+
+            List<PrefabSpawnData> spawnData = new(LevelData.Level.WorldObjectPositions);
+            spawnData.Sort();
+
+            foreach (PrefabSpawnData data in spawnData)
+            {
+                GameObject prefab = null;
+                if (!preloadedResources.ContainsKey(data.PrefabResourcePath))
+                {
+                    prefab = Resources.Load<GameObject>(data.PrefabResourcePath);
+                }
+                else
+                {
+                    prefab = preloadedResources[data.PrefabResourcePath];
+                }
+
+                Vector3 spawnLocation = data.Position + Vector3.up * AnimateInCurve.Evaluate(0);
+                GameObject instance = Instantiate(prefab, spawnLocation, data.Rotation, Tilemap.transform);
+                instance.transform.localScale = data.Scale;
+
+                StartCoroutine(AnimateIn(instance.transform, baseDelay * index));
+                index++;
+
+            }
+        }
+
+        private IEnumerator AnimateIn(Transform transform, float delay)
+        {
+            Vector3 spawnLocation = transform.position;
+            Vector3 targetLocation = transform.position + Vector3.up;
+            yield return new WaitForSeconds(delay);
+            float time = 0;
+            while (time < 1)
+            {
+                time += Time.deltaTime * AnimationSpeed;
+                float yOffset = AnimateInCurve.Evaluate(time);
+                transform.position = targetLocation + Vector3.up * yOffset;
+                yield return null;
+            }
+
+            transform.position = targetLocation;
+        }
+
+        private void FindTilemap()
+        {
+            Tilemap = FindObjectsByType<Tilemap>(FindObjectsSortMode.None).FirstOrDefault();
+            Grid = FindObjectsByType<Grid>(FindObjectsSortMode.None).FirstOrDefault();
+
+            if (Tilemap == null || Grid == null)
+            {
+                Debug.LogError($"Scene {SceneManager.GetActiveScene().name} is invalid! Level requires a Tilemap and Grid!");
+            }
+        }
+
+        private void ClearTilemap()
+        {
+            for (int i = Tilemap.transform.childCount - 1; i >= 0; i--)
+            {
+                DestroyImmediate(Tilemap.transform.GetChild(i).gameObject);
+            }
+        }
+    }
+}

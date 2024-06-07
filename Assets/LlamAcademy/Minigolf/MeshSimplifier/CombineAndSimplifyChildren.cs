@@ -21,12 +21,7 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
             Combiner = GetComponent<MeshCombiner>();
         }
 
-        private void Start()
-        {
-            Simplify();
-        }
-
-        private void Simplify()
+        public void Simplify()
         {
             Combiner.CombineMeshes(true);
             MeshFilter filter = GetComponent<MeshFilter>();

@@ -1,8 +1,8 @@
-using System;
 using Cinemachine;
 using LlamAcademy.Minigolf.UI.Modals.About;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace LlamAcademy.Minigolf.UI
@@ -12,6 +12,11 @@ namespace LlamAcademy.Minigolf.UI
     {
         [SerializeField] private CinemachineVirtualCamera VirtualCamera;
         [SerializeField] [Range(0.1f, 5f)] private float RotationSpeed = 1f;
+        /// <summary>
+        /// Both MainMenu and Game scenes should refer to this same single SO so they can use it to pass data between
+        /// the scenes without static classes.
+        /// </summary>
+        [SerializeField] private LevelDataSO LevelData;
         private UIDocument Document;
         private Button PlayGameButton => Document.rootVisualElement.Q<Button>("play-game-button");
         private Button AboutGameButton => Document.rootVisualElement.Q<Button>("about-game-button");
@@ -19,7 +24,7 @@ namespace LlamAcademy.Minigolf.UI
 
         private LevelSelection LevelSelectionModal;
         private About AboutModal;
-        private CinemachineOrbitalTransposer transposer;
+        private CinemachineOrbitalTransposer Transposer;
 
         private void Awake()
         {
@@ -32,12 +37,20 @@ namespace LlamAcademy.Minigolf.UI
             LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"));
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
 
-            transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+            LevelSelectionModal.OnLevelSelected += OnLevelSelected;
+
+            Transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        }
+
+        private void OnLevelSelected(LevelSO levelData)
+        {
+            LevelData.Level = levelData;
+            SceneManager.LoadScene(Constants.GAME_SCENE_NAME);
         }
 
         private void Update()
         {
-            transposer.m_XAxis.Value += Time.deltaTime * RotationSpeed;
+            Transposer.m_XAxis.Value += Time.deltaTime * RotationSpeed;
         }
 
         private void ShowLevelPopup(ClickEvent _ = null)

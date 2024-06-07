@@ -199,7 +199,7 @@ namespace LlamAcademy.Minigolf.Editor
                 }
             }
 
-            Level level = CreateInstance<Level>();
+            LevelSO level = CreateInstance<LevelSO>();
             level.WorldObjectPositions = saveData;
 
             string directory = DirectoryInput.value.Trim();
@@ -246,7 +246,7 @@ namespace LlamAcademy.Minigolf.Editor
 
             ClearTilemap(_);
 
-            Level level = LoadFileField.value as Level;
+            LevelSO level = LoadFileField.value as LevelSO;
             Dictionary<string, GameObject> preloadedResources = new();
             foreach (PrefabSpawnData data in level.WorldObjectPositions)
             {
@@ -260,7 +260,9 @@ namespace LlamAcademy.Minigolf.Editor
                     prefab = preloadedResources[data.PrefabResourcePath];
                 }
 
-                GameObject instance = Instantiate(prefab, data.Position, data.Rotation, Tilemap.transform);
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                instance.transform.SetPositionAndRotation(data.Position, data.Rotation);
+                instance.transform.SetParent(Tilemap.transform);
                 instance.transform.localScale = data.Scale;
             }
         }

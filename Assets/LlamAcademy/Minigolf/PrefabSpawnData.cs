@@ -1,9 +1,10 @@
+using System;
 using UnityEngine;
 
 namespace LlamAcademy.Minigolf
 {
     [System.Serializable]
-    public class PrefabSpawnData
+    public class PrefabSpawnData : IComparable<PrefabSpawnData>
     {
         public string PrefabResourcePath;
         public Vector3 Position;
@@ -26,6 +27,11 @@ namespace LlamAcademy.Minigolf
             Position = position;
             Rotation = rotation;
             Scale = scale;
+        }
+
+        public int CompareTo(PrefabSpawnData other)
+        {
+            return Position.sqrMagnitude.CompareTo(other.Position.sqrMagnitude);
         }
     }
 }

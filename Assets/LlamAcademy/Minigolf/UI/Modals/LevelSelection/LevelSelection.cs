@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using LlamAcademy.Minigolf.UI.Components;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
@@ -11,7 +10,11 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         private ScrollView ScrollView;
         private Label CloseButton;
         private VisualTreeAsset LevelPrefab;
-        private List<Level> AvailableLevels;
+        private List<LevelSO> AvailableLevels;
+
+        public delegate void LevelSelectedEvent(LevelSO levelData);
+
+        public event LevelSelectedEvent OnLevelSelected;
 
         private List<UILevel> UILevels;
 
@@ -21,7 +24,7 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
             IsOverlay = true;
 
             LevelPrefab = Resources.Load<VisualTreeAsset>("UILevel");
-            AvailableLevels = new List<Level>(Resources.LoadAll<Level>("Levels/"));
+            AvailableLevels = new List<LevelSO>(Resources.LoadAll<LevelSO>("Levels/"));
 
             Initialize(root);
         }
@@ -32,22 +35,22 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
             ScrollView = Root.Q<ScrollView>();
             CloseButton = Root.Q<Label>("close-button");
 
-            foreach (Level level in AvailableLevels)
+            foreach (LevelSO level in AvailableLevels)
             {
                 VisualElement uiLevelRoot = new();
                 LevelPrefab.CloneTree(uiLevelRoot);
                 UILevel uiLevel = new(uiLevelRoot, level);
 
-                uiLevel.Root.RegisterCallback<ClickEvent, Level>(HandleUIClick, level);
+                uiLevel.Root.RegisterCallback<ClickEvent, LevelSO>(HandleUIClick, level);
 
                 ScrollView.Add(uiLevel.Root);
                 UILevels.Add(uiLevel);
             }
         }
 
-        private void HandleUIClick(ClickEvent evt, Level levelData)
+        private void HandleUIClick(ClickEvent evt, LevelSO levelData)
         {
-            SceneManager.LoadScene("LlamAcademy/Minigolf/Scenes/Game");
+            OnLevelSelected?.Invoke(levelData);
         }
 
         public override void Show()
@@ -83,7 +86,7 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         {
             foreach (UILevel uiLevel in UILevels)
             {
-                uiLevel.Root.UnregisterCallback<ClickEvent, Level>(HandleUIClick);
+                uiLevel.Root.UnregisterCallback<ClickEvent, LevelSO>(HandleUIClick);
             }
 
             CloseButton.UnregisterCallback<ClickEvent>(Hide);

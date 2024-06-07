@@ -13,9 +13,9 @@ namespace LlamAcademy.Minigolf.UI.Components
         private Label LevelLabel;
         private Label ScoreLabel;
         private Label ParLabel;
-        private Level Level;
+        private LevelSO Level;
 
-        public UILevel(VisualElement root, Level level)
+        public UILevel(VisualElement root, LevelSO level)
         {
             Level = level;
             Initialize(root);

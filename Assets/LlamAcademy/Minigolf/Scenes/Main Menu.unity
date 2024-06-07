@@ -13153,6 +13153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VirtualCamera: {fileID: 201687492}
   RotationSpeed: 5
+  LevelData: {fileID: 11400000, guid: 72975399cdedf284ca104505ca14c52f, type: 2}
 --- !u!43 &1909212980
 Mesh:
   m_ObjectHideFlags: 0

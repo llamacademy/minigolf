@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace LlamAcademy.Minigolf
 {
-    public class Level : ScriptableObject
+    public class LevelSO : ScriptableObject
     {
         public List<PrefabSpawnData> WorldObjectPositions;
 
@@ -15,9 +15,9 @@ namespace LlamAcademy.Minigolf
             new (Rating.Fail, 5)
         };
 
-        public Level() {}
+        public LevelSO() {}
 
-        public Level(List<PrefabSpawnData> worldObjectPositions)
+        public LevelSO(List<PrefabSpawnData> worldObjectPositions)
         {
             WorldObjectPositions = worldObjectPositions;
         }
