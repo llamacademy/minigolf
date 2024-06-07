@@ -1,3 +1,5 @@
+using System;
+using Cinemachine;
 using LlamAcademy.Minigolf.UI.Modals.About;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
 using UnityEngine;
@@ -8,6 +10,8 @@ namespace LlamAcademy.Minigolf.UI
     [RequireComponent(typeof(UIDocument))]
     public class MainMenu : MonoBehaviour
     {
+        [SerializeField] private CinemachineVirtualCamera VirtualCamera;
+        [SerializeField] [Range(0.1f, 5f)] private float RotationSpeed = 1f;
         private UIDocument Document;
         private Button PlayGameButton => Document.rootVisualElement.Q<Button>("play-game-button");
         private Button AboutGameButton => Document.rootVisualElement.Q<Button>("about-game-button");
@@ -15,6 +19,7 @@ namespace LlamAcademy.Minigolf.UI
 
         private LevelSelection LevelSelectionModal;
         private About AboutModal;
+        private CinemachineOrbitalTransposer transposer;
 
         private void Awake()
         {
@@ -26,6 +31,13 @@ namespace LlamAcademy.Minigolf.UI
 
             LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"));
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
+
+            transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+        }
+
+        private void Update()
+        {
+            transposer.m_XAxis.Value += Time.deltaTime * RotationSpeed;
         }
 
         private void ShowLevelPopup(ClickEvent _ = null)
