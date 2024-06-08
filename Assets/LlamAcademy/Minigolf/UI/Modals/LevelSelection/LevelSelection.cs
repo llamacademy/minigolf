@@ -13,10 +13,10 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         private List<LevelSO> AvailableLevels;
 
         public delegate void LevelSelectedEvent(LevelSO levelData);
-
         public event LevelSelectedEvent OnLevelSelected;
 
         private List<UILevel> UILevels;
+        private bool IsDragging;
 
         public LevelSelection(VisualElement root)
         {
@@ -43,6 +43,10 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
 
                 uiLevel.Root.RegisterCallback<ClickEvent, LevelSO>(HandleUIClick, level);
 
+                uiLevel.Root.RegisterCallback<MouseDownEvent>(HandleMouseDownDrag);
+                uiLevel.Root.RegisterCallback<MouseUpEvent>(HandleMouseUpDrag);
+                uiLevel.Root.RegisterCallback<MouseMoveEvent>(HandleMouseMove);
+
                 ScrollView.Add(uiLevel.Root);
                 UILevels.Add(uiLevel);
             }
@@ -68,6 +72,19 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         protected override void RegisterButtonCallbacks()
         {
             CloseButton.RegisterCallback<ClickEvent>(Hide);
+            ScrollView.RegisterCallback<PointerLeaveEvent>(HandleLoseMouse);
+        }
+
+        private void HandleLoseMouse(PointerLeaveEvent evt) => IsDragging = false;
+        private void HandleMouseUpDrag(MouseUpEvent evt) => IsDragging = false;
+        private void HandleMouseDownDrag(MouseDownEvent evt) => IsDragging = true;
+
+        private void HandleMouseMove(MouseMoveEvent evt)
+        {
+            if (!IsDragging) return;
+
+            // ideally we'd use some kind of velocity on this, but this gets us started
+            ScrollView.scrollOffset -= evt.mouseDelta;
         }
 
         private void Hide(ClickEvent evt)

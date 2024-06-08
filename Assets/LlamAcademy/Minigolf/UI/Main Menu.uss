@@ -4,7 +4,11 @@
     justify-content: center;
 }
 .container {
-    margin: 30% 5%;
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 525px;
+    width: 300px;
     padding: 12px;
     border-radius: 8px;
     background-color: var(--background--light);

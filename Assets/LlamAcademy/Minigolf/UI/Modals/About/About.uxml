@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=60c1de3a44d20fb4c90fe92e9a2976dd&amp;type=3#Main Menu" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
-        <ui:VisualElement name="container" class="container">
+        <ui:VisualElement name="container" class="container" style="height: 650px; width: 350px;">
             <ui:Label text="About" name="about-title" class="header" style="min-height: 50px;">
                 <ui:Label text="X" name="close-button" class="close-button" />
             </ui:Label>

@@ -4,7 +4,7 @@
     <ui:Template name="LevelSelectionModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uxml" />
     <ui:Template name="AboutModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/About/About.uxml" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
-        <ui:VisualElement name="menu-container" class="container" style="flex-grow: 1;">
+        <ui:VisualElement name="menu-container" class="container">
             <ui:VisualElement name="logo" />
             <ui:Button text="Play" name="play-game-button" class="primary" />
             <ui:Button text="About" name="about-game-button" class="secondary" />

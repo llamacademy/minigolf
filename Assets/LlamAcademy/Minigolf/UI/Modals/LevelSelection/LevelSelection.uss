@@ -3,6 +3,29 @@
     height: 50px;
 }
 
+.container {
+    height: 600px;
+    width: 340px;
+}
+
 Label {
     min-width: 50px;
+}
+
+ScrollView RepeatButton {
+    display: none;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+ScrollView ScrollerSlider, ScrollView Scroller {
+    min-width: 5px;
+    width: 5px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ScrollView Scroller {
+    margin-left: 4px;
 }

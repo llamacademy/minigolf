@@ -65,7 +65,7 @@ MonoBehaviour:
   m_RendererFeatureMap: adc0de57c6d2eee51a9ca9fc42b01950
   m_UseNativeRenderPass: 1
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
-  postProcessData: {fileID: 11400000, guid: 1ef789be5a1d5db4dbed165061f927da, type: 2}
+  postProcessData: {fileID: 11400000, guid: 34dbda5837882bd4ea2c37813c887b32, type: 2}
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
@@ -81,7 +81,7 @@ MonoBehaviour:
     failOperation: 0
     zFailOperation: 0
   m_ShadowTransparentReceive: 1
-  m_RenderingMode: 1
+  m_RenderingMode: 2
   m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
   m_DepthAttachmentFormat: 0
