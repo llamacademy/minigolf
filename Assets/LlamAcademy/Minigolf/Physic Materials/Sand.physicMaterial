@@ -8,8 +8,8 @@ PhysicsMaterial:
   m_PrefabAsset: {fileID: 0}
   m_Name: Sand
   serializedVersion: 2
-  m_DynamicFriction: 5
-  m_StaticFriction: 5
+  m_DynamicFriction: 1
+  m_StaticFriction: 1
   m_Bounciness: 0.1
-  m_FrictionCombine: 0
+  m_FrictionCombine: 3
   m_BounceCombine: 0

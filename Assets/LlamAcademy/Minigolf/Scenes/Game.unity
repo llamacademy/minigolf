@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Ball: {fileID: 1515914404}
   PowerImage: {fileID: 101224283}
-  MaxForce: 2
+  MaxForce: 10
   PowerGradient:
     serializedVersion: 2
     key0: {r: 1, g: 0, b: 0, a: 1}
@@ -1412,8 +1412,12 @@ PrefabInstance:
       value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      propertyPath: m_Mass
-      value: 0.1
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
+      propertyPath: m_AngularDrag
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
       propertyPath: m_Interpolate
