@@ -3,14 +3,12 @@ using UnityMeshSimplifier;
 
 namespace LlamAcademy.Minigolf.MeshSimplifier
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(MeshCombiner))]
     public class CombineAndSimplifyChildren : MonoBehaviour
     {
         [SerializeField, Range(0f, 1f), Tooltip("The desired quality of the simplified mesh.")]
         private float Quality = 0.5f;
-
-        // TODO: handle this and split meshes by type. That **may** make it where seams bounce again though.
-        [SerializeField] private MaterialPhysicMaterial[] MaterialsToPhysicMaterials;
 
         [SerializeField] private SimplificationOptions SimplificationOptions = SimplificationOptions.Default;
 
@@ -23,16 +21,16 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
         public void Simplify()
         {
-            Combiner.CombineMeshes(true);
-            MeshFilter filter = GetComponent<MeshFilter>();
+            // Combines all child meshes, with configurable exclusions. This can result in duplicate vertices due to
+            // our tile placement. These will be removed later by the UnityMeshSimplifier.
+            // This also overrides the current MeshFilter's mesh, so we need to update the MeshCollider mesh to match!
+            Combiner.CombineMeshes();
+            MeshFilter[] filters = GetComponentsInChildren<MeshFilter>();
 
-            if (!TryGetComponent(out MeshCollider collider))
+            foreach (MeshFilter filter in filters)
             {
-                collider = gameObject.AddComponent<MeshCollider>();
+                SimplifyMeshFilter(filter);
             }
-
-            SimplifyMeshFilter(filter);
-            collider.sharedMesh = filter.sharedMesh;
         }
 
         private void SimplifyMeshFilter(MeshFilter meshFilter)
@@ -46,13 +44,17 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
             meshSimplifier.SimplificationOptions = SimplificationOptions;
             meshSimplifier.Initialize(sourceMesh);
 
-            // This is where the magic happens, lets simplify!
+            // Simplifies the mesh, combining vertices close enough together to be considered a single vertex
+            // this eliminates the "bounce" from connecting multiple different tiles
             meshSimplifier.SimplifyMesh(Quality);
 
             // Create our final mesh and apply it back to our mesh filter
             meshFilter.sharedMesh = meshSimplifier.ToMesh();
+
+            if (meshFilter.TryGetComponent(out MeshCollider collider))
+            {
+                collider.sharedMesh = meshFilter.sharedMesh;
+            }
         }
-
-
     }
 }

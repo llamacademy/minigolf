@@ -5,61 +5,43 @@ using UnityEngine;
 namespace LlamAcademy.Minigolf.MeshSimplifier
 {
     /*
-     Original implementation from: https://github.com/dawid-t/Mesh-Combiner
-     Modified by: Chris Kurhan from LlamAcademy 2024
-     MIT License
-
-    Copyright (c) 2019 Dawid T
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.
+     * Original implementation from: https://github.com/dawid-t/Mesh-Combiner
+     * Heavily modified for mesh colliders and vertex color splitting by: Chris Kurhan @ LlamAcademy 2024
+     * MIT License
+     *
+     * Copyright (c) 2019 Dawid T
+     * Copyright (c) 2024 LlamAcademy
+     *
+     * Permission is hereby granted, free of charge, to any person obtaining a copy
+     * of this software and associated documentation files (the "Software"), to deal
+     * in the Software without restriction, including without limitation the rights
+     * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     * copies of the Software, and to permit persons to whom the Software is
+     * furnished to do so, subject to the following conditions:
+     *
+     * The above copyright notice and this permission notice shall be included in all
+     * copies or substantial portions of the Software.
+     *
+     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     * SOFTWARE.
      */
-    [RequireComponent(typeof(MeshFilter))]
-    [RequireComponent(typeof(MeshRenderer))]
+    [DisallowMultipleComponent]
     public class MeshCombiner : MonoBehaviour
     {
-        private const int Mesh16BitBufferVertexLimit = 65535;
-
-        [SerializeField] private bool createMultiMaterialMesh = false,
-            combineInactiveChildren = false,
-            deactivateCombinedChildren = true,
+        [SerializeField] private bool deactivateCombinedChildren = true,
             deactivateCombinedChildrenMeshRenderers = false,
-            generateUVMap = false,
             destroyCombinedChildren = false;
 
-        [SerializeField] [Tooltip("MeshFilters with Meshes which we don't want to combine into one Mesh.")]
-        private MeshFilter[] meshFiltersToSkip = new MeshFilter[0];
-
-        public bool CreateMultiMaterialMesh
-        {
-            get { return createMultiMaterialMesh; }
-            set { createMultiMaterialMesh = value; }
-        }
-
-        public bool CombineInactiveChildren
-        {
-            get { return combineInactiveChildren; }
-            set { combineInactiveChildren = value; }
-        }
+        [field: SerializeField] public bool CombineInactiveChildren { get; set; } = true;
 
         public bool DeactivateCombinedChildren
         {
-            get { return deactivateCombinedChildren; }
+            get => deactivateCombinedChildren;
             set
             {
                 deactivateCombinedChildren = value;
@@ -69,7 +51,7 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
         public bool DeactivateCombinedChildrenMeshRenderers
         {
-            get { return deactivateCombinedChildrenMeshRenderers; }
+            get => deactivateCombinedChildrenMeshRenderers;
             set
             {
                 deactivateCombinedChildrenMeshRenderers = value;
@@ -77,15 +59,9 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
             }
         }
 
-        public bool GenerateUVMap
-        {
-            get { return generateUVMap; }
-            set { generateUVMap = value; }
-        }
-
         public bool DestroyCombinedChildren
         {
-            get { return destroyCombinedChildren; }
+            get => destroyCombinedChildren;
             set
             {
                 destroyCombinedChildren = value;
@@ -110,10 +86,16 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
             }
         }
 
+        public Dictionary<int, PhysicsMaterial> CombineIndexToPhysicMaterial { get; private set; } = new();
+
         /// <summary>
-        /// Combine children's Meshes into one Mesh. Set 'showCreatedMeshInfo' to true if want to show info about created Mesh in the console.
+        /// Combines all child meshes and stores the result into NEW SUB OBJECTS.
+        /// There will be N new child gameObjects created with MeshColliders, MeshFilters, and MeshRenderers
+        /// where N is the number of unique vertex colors on child objects.
+        /// All objects are considered to have a single vertex color.
         /// </summary>
-        public void CombineMeshes(bool showCreatedMeshInfo)
+        /// <param name="showCreatedMeshInfo">If we should log the creation information to the console.</param>
+        public void CombineMeshes(bool showCreatedMeshInfo = true)
         {
             #region Save our parent scale and our Transform and reset it temporarily:
 
@@ -135,18 +117,7 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
             #endregion Save Transform and reset it temporarily.
 
-            #region Combine Meshes into one Mesh:
-
-            if (!createMultiMaterialMesh)
-            {
-                CombineMeshesWithSingleMaterial(showCreatedMeshInfo);
-            }
-            else
-            {
-                CombineMeshesWithMutliMaterial(showCreatedMeshInfo);
-            }
-
-            #endregion Combine Meshes into one Mesh.
+            DoCombineMeshes(showCreatedMeshInfo);
 
             #region Set old Transform values:
 
@@ -165,305 +136,142 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
             #endregion Set old Transform values.
         }
 
-        private MeshFilter[] GetMeshFiltersToCombine()
+        private Dictionary<Color, MeshFilter[]> GetMeshFiltersToCombine(out int totalMeshCount)
         {
-            // Get all MeshFilters belongs to this GameObject and its children:
-            MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>(combineInactiveChildren);
+            MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>(CombineInactiveChildren);
+            MeshFilter currentObjectFilter = GetComponent<MeshFilter>();
 
-            // Delete first MeshFilter belongs to this GameObject in meshFiltersToSkip array:
-            meshFiltersToSkip = meshFiltersToSkip.Where((meshFilter) => meshFilter != meshFilters[0]).ToArray();
+            // exclude current object's mesh filter and any null values. Ideally you don't have one here.
+            meshFilters = meshFilters
+                .Where((meshFilter) => meshFilter != currentObjectFilter && meshFilter.mesh != null && meshFilter.mesh.colors.Length != 0).ToArray();
 
-            // Delete null values in meshFiltersToSkip array:
-            meshFiltersToSkip = meshFiltersToSkip.Where((meshFilter) => meshFilter != null).ToArray();
+            totalMeshCount = meshFilters.Length;
 
-            for (int i = 0; i < meshFiltersToSkip.Length; i++)
-            {
-                meshFilters = meshFilters.Where((meshFilter) => meshFilter != meshFiltersToSkip[i]).ToArray();
-            }
-
-            return meshFilters;
+            return meshFilters.GroupBy(meshFilter => meshFilter.mesh.colors[0]).ToDictionary(keySelector => keySelector.Key, filters => filters.ToArray());
         }
 
-        private void CombineMeshesWithSingleMaterial(bool showCreatedMeshInfo)
+        private void DoCombineMeshes(bool showCreatedMeshInfo)
         {
-            // Get all MeshFilters belongs to this GameObject and its children:
-            MeshFilter[] meshFilters = GetMeshFiltersToCombine();
+            Dictionary<Color, MeshFilter[]> meshFiltersGrouping =
+                GetMeshFiltersToCombine(out int totalMeshCount);
 
-            // First MeshFilter belongs to this GameObject so we don't need it:
-            CombineInstance[] combineInstances = new CombineInstance[meshFilters.Length - 1];
+            CombineInstance[] combineInstances = new CombineInstance[totalMeshCount];
 
             // If it will be over 65535 then use the 32 bit index buffer:
             long verticesLength = 0;
 
-            for (int i = 0;
-                 i < meshFilters.Length - 1;
-                 i++) // Skip first MeshFilter belongs to this GameObject in this loop.
-            {
-                combineInstances[i].subMeshIndex = 0;
-                combineInstances[i].mesh = meshFilters[i + 1].sharedMesh;
-                combineInstances[i].transform = meshFilters[i + 1].transform.localToWorldMatrix;
-                verticesLength += combineInstances[i].mesh.vertices.Length;
-            }
+            int combineIndex = 0;
+            int subMeshIndex = 0; // grouping by this based on vertex color
 
-            // Set Material from child:
-            MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>(combineInactiveChildren);
-            if (meshRenderers.Length >= 2)
+            foreach (KeyValuePair<Color, MeshFilter[]> grouping in meshFiltersGrouping)
             {
-                meshRenderers[0].sharedMaterials = new Material[1];
-                meshRenderers[0].sharedMaterial = meshRenderers[1].sharedMaterial;
-            }
-            else
-            {
-                meshRenderers[0].sharedMaterials = new Material[0]; // Reset the MeshRenderer's Materials array.
-            }
+                MeshFilter[] filters = grouping.Value;
 
-            // Create Mesh from combineInstances:
-            Mesh combinedMesh = new Mesh();
-            combinedMesh.name = name;
-
-#if UNITY_2017_3_OR_NEWER
-            if (verticesLength > Mesh16BitBufferVertexLimit)
-            {
-                combinedMesh.indexFormat =
-                    UnityEngine.Rendering.IndexFormat.UInt32; // Only works on Unity 2017.3 or higher.
-            }
-
-            combinedMesh.CombineMeshes(combineInstances);
-            GenerateUV(combinedMesh);
-            meshFilters[0].sharedMesh = combinedMesh;
-            DeactivateCombinedGameObjects(meshFilters);
-
-            if (showCreatedMeshInfo)
-            {
-                if (verticesLength <= Mesh16BitBufferVertexLimit)
+                foreach (MeshFilter filter in filters)
                 {
-                    Debug.Log("<color=#00cc00><b>Mesh \"" + name + "\" was created from " + combineInstances.Length +
-                              " children meshes and has " + verticesLength
-                              + " vertices.</b></color>");
-                }
-                else
-                {
-                    Debug.Log("<color=#ff3300><b>Mesh \"" + name + "\" was created from " + combineInstances.Length +
-                              " children meshes and has " + verticesLength
-                              + " vertices. Some old devices, like Android with Mali-400 GPU, do not support over 65535 vertices.</b></color>");
-                }
-            }
-#else
-		if(verticesLength <= Mesh16BitBufferVertexLimit)
-		{
-			combinedMesh.CombineMeshes(combineInstances);
-			GenerateUV(combinedMesh);
-			meshFilters[0].sharedMesh = combinedMesh;
-			DeactivateCombinedGameObjects(meshFilters);
+                    combineInstances[combineIndex].subMeshIndex = subMeshIndex;
+                    combineInstances[combineIndex].mesh = filter.sharedMesh;
+                    combineInstances[combineIndex].transform = filter.transform.localToWorldMatrix;
+                    verticesLength += combineInstances[combineIndex].mesh.vertices.Length;
 
-			if(showCreatedMeshInfo)
-			{
-				Debug.Log("<color=#00cc00><b>Mesh \""+name+"\" was created from "+combineInstances.Length+" children meshes and has "+verticesLength
-					+" vertices.</b></color>");
-			}
-		}
-		else if(showCreatedMeshInfo)
-		{
-			Debug.Log("<color=red><b>The mesh vertex limit is 65535! The created mesh had "+verticesLength+" vertices. Upgrade Unity version to"
-				+" 2017.3 or higher to avoid this limit (some old devices, like Android with Mali-400 GPU, do not support over 65535 vertices).</b></color>");
-		}
-#endif
-        }
-
-        private void CombineMeshesWithMutliMaterial(bool showCreatedMeshInfo)
-        {
-            #region Get MeshFilters, MeshRenderers and unique Materials from all children:
-
-            MeshFilter[] meshFilters = GetMeshFiltersToCombine();
-            MeshRenderer[] meshRenderers = new MeshRenderer[meshFilters.Length];
-            meshRenderers[0] = GetComponent<MeshRenderer>(); // Our (parent) MeshRenderer.
-
-            List<Material> uniqueMaterialsList = new List<Material>();
-            for (int i = 0; i < meshFilters.Length - 1; i++)
-            {
-                meshRenderers[i + 1] = meshFilters[i + 1].GetComponent<MeshRenderer>();
-                if (meshRenderers[i + 1] != null)
-                {
-                    Material[] materials = meshRenderers[i + 1].sharedMaterials; // Get all Materials from child Mesh.
-                    for (int j = 0; j < materials.Length; j++)
+                    if (!CombineIndexToPhysicMaterial.ContainsKey(subMeshIndex) &&
+                        filter.TryGetComponent(out Collider collider))
                     {
-                        if (!uniqueMaterialsList
-                                .Contains(materials[j])) // If Material doesn't exists in the list then add it.
-                        {
-                            uniqueMaterialsList.Add(materials[j]);
-                        }
+                        Debug.Log($"Found physic material {collider.sharedMaterial.name} for submesh index {subMeshIndex}");
+                        CombineIndexToPhysicMaterial.Add(subMeshIndex, collider.sharedMaterial);
                     }
+                    combineIndex++;
                 }
+
+                subMeshIndex++;
             }
 
-            #endregion Get MeshFilters, MeshRenderers and unique Materials from all children.
+            // assumes no MeshRenderer on the current object and all children are using the same material.
+            MeshRenderer childMeshRenderer = GetComponentInChildren<MeshRenderer>();
 
-            #region Combine children Meshes with the same Material to create submeshes for final Mesh:
+            // Create Mesh(es) from combineInstances:
+            combineIndex = 0;
 
-            List<CombineInstance> finalMeshCombineInstancesList = new List<CombineInstance>();
-
-            // If it will be over 65535 then use the 32 bit index buffer:
-            long verticesLength = 0;
-
-            for (int i = 0;
-                 i < uniqueMaterialsList.Count;
-                 i++) // Create each Mesh (submesh) from Meshes with the same Material.
+            DeactivateCombinedGameObjects(meshFiltersGrouping);
+            foreach (KeyValuePair<Color, MeshFilter[]> keyValuePair in meshFiltersGrouping)
             {
-                List<CombineInstance> submeshCombineInstancesList = new List<CombineInstance>();
-
-                for (int j = 0; j < meshFilters.Length - 1; j++) // Get only childeren Meshes (skip our Mesh).
+                Mesh combinedMesh = new Mesh
                 {
-                    if (meshRenderers[j + 1] != null)
-                    {
-                        Material[] submeshMaterials =
-                            meshRenderers[j + 1].sharedMaterials; // Get all Materials from child Mesh.
+                    name = $"Combined Mesh {combineIndex}",
+                    indexFormat = UnityEngine.Rendering.IndexFormat.UInt32
+                };
 
-                        for (int k = 0; k < submeshMaterials.Length; k++)
+                // since Physic Materials cannot be applied to sub-meshes, we need discrete colliders for each!
+                CombineInstance[] relevantCombineInstances =
+                    combineInstances.Where(instance => instance.subMeshIndex == combineIndex).ToArray();
+                for (int i = 0; i < relevantCombineInstances.Length; i++)
+                {
+                    relevantCombineInstances[i].subMeshIndex = 0; // force back to submesh 0
+                }
+
+                combinedMesh.CombineMeshes(relevantCombineInstances);
+                // GenerateUV(combinedMesh); // only works in editor
+
+                GameObject child = new ($"Child Mesh Index {combineIndex}");
+                MeshFilter filter = child.AddComponent<MeshFilter>();
+                filter.sharedMesh = combinedMesh;
+                MeshCollider collider = child.AddComponent<MeshCollider>();
+                collider.sharedMesh = combinedMesh;
+                collider.sharedMaterial = CombineIndexToPhysicMaterial[combineIndex];
+                MeshRenderer renderer = child.AddComponent<MeshRenderer>();
+                renderer.sharedMaterial = childMeshRenderer.sharedMaterial;
+                child.transform.SetParent(transform, false);
+                child.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
+
+                if (showCreatedMeshInfo)
+                {
+                    Debug.Log($"<color=#ff3300><b>Mesh \"{name}\" was created from {combineInstances.Length} " +
+                              $"child meshes and has {verticesLength} vertices. " +
+                              $"Combine Mesh Index {combineIndex}</color>");
+                }
+
+                combineIndex++;
+            }
+
+        }
+
+        private void DeactivateCombinedGameObjects(Dictionary<Color, MeshFilter[]> meshFilterGrouping)
+        {
+            foreach (KeyValuePair<Color, MeshFilter[]> keyValuePair in meshFilterGrouping)
+            {
+                for (int i = keyValuePair.Value.Length - 1; i >= 0; i--)
+                {
+                    if (!destroyCombinedChildren)
+                    {
+                        if (keyValuePair.Value[i].TryGetComponent(out Collider collider))
                         {
-                            // If Materials are equal, combine Mesh from this child:
-                            if (uniqueMaterialsList[i] == submeshMaterials[k])
+                            collider.enabled = false; // since we're creating a new collider, we definitely don't want the old one
+                        }
+
+                        if (deactivateCombinedChildren)
+                        {
+                            keyValuePair.Value[i].gameObject.SetActive(false);
+                        }
+
+                        if (deactivateCombinedChildrenMeshRenderers)
+                        {
+                            MeshRenderer meshRenderer = keyValuePair.Value[i].gameObject.GetComponent<MeshRenderer>();
+                            if (meshRenderer != null)
                             {
-                                CombineInstance combineInstance = new CombineInstance();
-                                combineInstance.subMeshIndex = k; // Mesh may consist of smaller parts - submeshes.
-                                // Every part have different index. If there are 3 submeshes
-                                // in Mesh then MeshRender needs 3 Materials to render them.
-                                combineInstance.mesh = meshFilters[j + 1].sharedMesh;
-                                combineInstance.transform = meshFilters[j + 1].transform.localToWorldMatrix;
-                                submeshCombineInstancesList.Add(combineInstance);
-                                verticesLength += combineInstance.mesh.vertices.Length;
+                                meshRenderer.enabled = false;
                             }
                         }
                     }
-                }
-
-                // Create new Mesh (submesh) from Meshes with the same Material:
-                Mesh submesh = new Mesh();
-
-#if UNITY_2017_3_OR_NEWER
-                if (verticesLength > Mesh16BitBufferVertexLimit)
-                {
-                    submesh.indexFormat =
-                        UnityEngine.Rendering.IndexFormat.UInt32; // Only works on Unity 2017.3 or higher.
-                }
-
-                submesh.CombineMeshes(submeshCombineInstancesList.ToArray(), true);
-#else
-			// Below Unity 2017.3 if vertices count is above the limit then an error appears in the console when we use the below method.
-			// Anyway we don't stop the algorithm here beacuse we want to count the entire number of vertices in the children meshes:
-			if(verticesLength <= Mesh16BitBufferVertexLimit)
-			{
-				submesh.CombineMeshes(submeshCombineInstancesList.ToArray(), true);
-			}
-#endif
-
-                CombineInstance finalCombineInstance = new CombineInstance();
-                finalCombineInstance.subMeshIndex = 0;
-                finalCombineInstance.mesh = submesh;
-                finalCombineInstance.transform = Matrix4x4.identity;
-                finalMeshCombineInstancesList.Add(finalCombineInstance);
-            }
-
-            #endregion Combine submeshes (children Meshes) with the same Material.
-
-            #region Set Materials array & combine submeshes into one multimaterial Mesh:
-
-            meshRenderers[0].sharedMaterials = uniqueMaterialsList.ToArray();
-
-            Mesh combinedMesh = new Mesh();
-            combinedMesh.name = name;
-
-#if UNITY_2017_3_OR_NEWER
-            if (verticesLength > Mesh16BitBufferVertexLimit)
-            {
-                combinedMesh.indexFormat =
-                    UnityEngine.Rendering.IndexFormat.UInt32; // Only works on Unity 2017.3 or higher.
-            }
-
-            combinedMesh.CombineMeshes(finalMeshCombineInstancesList.ToArray(), false);
-            GenerateUV(combinedMesh);
-            meshFilters[0].sharedMesh = combinedMesh;
-            DeactivateCombinedGameObjects(meshFilters);
-
-            if (showCreatedMeshInfo)
-            {
-                if (verticesLength <= Mesh16BitBufferVertexLimit)
-                {
-                    Debug.Log("<color=#00cc00><b>Mesh \"" + name + "\" was created from " + (meshFilters.Length - 1) +
-                              " children meshes and has "
-                              + finalMeshCombineInstancesList.Count + " submeshes, and " + verticesLength +
-                              " vertices.</b></color>");
-                }
-                else
-                {
-                    Debug.Log("<color=#ff3300><b>Mesh \"" + name + "\" was created from " + (meshFilters.Length - 1) +
-                              " children meshes and has "
-                              + finalMeshCombineInstancesList.Count + " submeshes, and " + verticesLength
-                              + " vertices. Some old devices, like Android with Mali-400 GPU, do not support over 65535 vertices.</b></color>");
-                }
-            }
-#else
-		if(verticesLength <= Mesh16BitBufferVertexLimit)
-		{
-			combinedMesh.CombineMeshes(finalMeshCombineInstancesList.ToArray(), false);
-			GenerateUV(combinedMesh);
-			meshFilters[0].sharedMesh = combinedMesh;
-			DeactivateCombinedGameObjects(meshFilters);
-
-			if(showCreatedMeshInfo)
-			{
-				Debug.Log("<color=#00cc00><b>Mesh \""+name+"\" was created from "+(meshFilters.Length-1)+" children meshes and has "
-					+finalMeshCombineInstancesList.Count+" submeshes, and "+verticesLength+" vertices.</b></color>");
-			}
-		}
-		else if(showCreatedMeshInfo)
-		{
-			Debug.Log("<color=red><b>The mesh vertex limit is 65535! The created mesh had "+verticesLength+" vertices. Upgrade Unity version to"
-				+" 2017.3 or higher to avoid this limit (some old devices, like Android with Mali-400 GPU, do not support over 65535 vertices).</b></color>");
-		}
-#endif
-
-            #endregion Set Materials array & combine submeshes into one multimaterial Mesh.
-        }
-
-        private void DeactivateCombinedGameObjects(MeshFilter[] meshFilters)
-        {
-            for (int i = 0;
-                 i < meshFilters.Length - 1;
-                 i++) // Skip first MeshFilter belongs to this GameObject in this loop.
-            {
-                if (!destroyCombinedChildren)
-                {
-                    if (deactivateCombinedChildren)
+                    else
                     {
-                        meshFilters[i + 1].gameObject.SetActive(false);
-                    }
-
-                    if (deactivateCombinedChildrenMeshRenderers)
-                    {
-                        MeshRenderer meshRenderer = meshFilters[i + 1].gameObject.GetComponent<MeshRenderer>();
-                        if (meshRenderer != null)
-                        {
-                            meshRenderer.enabled = false;
-                        }
+                        #if UNITY_EDITOR
+                        DestroyImmediate(keyValuePair.Value[i].gameObject);
+                        #else
+                        Destroy(keyValuePair.Value[i].gameObject);
+                        #endif
                     }
                 }
-                else
-                {
-                    DestroyImmediate(meshFilters[i + 1].gameObject);
-                }
             }
-        }
-
-        private void GenerateUV(Mesh combinedMesh)
-        {
-#if UNITY_EDITOR
-            if (generateUVMap)
-            {
-                UnityEditor.UnwrapParam unwrapParam = new UnityEditor.UnwrapParam();
-                UnityEditor.UnwrapParam.SetDefaults(out unwrapParam);
-                UnityEditor.Unwrapping.GenerateSecondaryUVSet(combinedMesh, unwrapParam);
-            }
-#endif
         }
     }
 }
