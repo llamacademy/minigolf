@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using LlamAcademy.Minigolf.Bus;
 using LlamAcademy.Minigolf.Bus.Events;
@@ -37,6 +38,7 @@ namespace LlamAcademy.Minigolf.UI
         [SerializeField] private LevelDataSO LevelData;
 
         private int CurrentStrokes = 0;
+        private bool BallIsInHole = false;
 
         private Par PerfectRating;
         private Par GoodRating;
@@ -74,6 +76,24 @@ namespace LlamAcademy.Minigolf.UI
             Stars0RatingLabel.text = FailRating.Strokes.ToString();
 
             EventBus<PlayerStrokeEvent>.OnEvent += HandlePlayerStroke;
+            EventBus<BallInHoleEvent>.OnEvent += HandleEndLevel;
+        }
+
+        private void HandleEndLevel(BallInHoleEvent evt)
+        {
+            BallIsInHole = true;
+            StartCoroutine(HandleEndLevel());
+        }
+
+        private IEnumerator HandleEndLevel()
+        {
+            // Small delay for the win effect to play
+            yield return new WaitForSeconds(1f);
+
+            // you can add a more fancy end game screen, for our microgame we'll just show the pause menu without
+            // a resume option
+            ResumeButton.RemoveFromHierarchy();
+            ShowMenu(null);
         }
 
         private void ResetLevel(ClickEvent evt)
@@ -86,15 +106,27 @@ namespace LlamAcademy.Minigolf.UI
             CurrentStrokes++;
             CurrentStrokesLabel.text = CurrentStrokes.ToString();
 
-            if (CurrentStrokes > FailRating.Strokes)
+            if (CurrentStrokes == FailRating.Strokes)
             {
-                // TODO: END GAME
+                EventBus<BallSettledEvent>.OnEvent += HandleFinalBallSettle;
+            }
+        }
+
+        private void HandleFinalBallSettle(BallSettledEvent evt)
+        {
+            EventBus<BallSettledEvent>.OnEvent -= HandleFinalBallSettle;
+            if (!BallIsInHole)
+            {
+                ResumeButton.RemoveFromHierarchy();
+                ShowMenu(null);
             }
         }
 
         private void OnDestroy()
         {
             EventBus<PlayerStrokeEvent>.OnEvent -= HandlePlayerStroke;
+            EventBus<BallInHoleEvent>.OnEvent -= HandleEndLevel;
+            EventBus<BallSettledEvent>.OnEvent -= HandleFinalBallSettle;
         }
 
         private void ReturnToMainMenu(ClickEvent evt)
