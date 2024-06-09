@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace LlamAcademy.Minigolf.Bus.Events
 {
-    public struct BallSettledEvent
+    public struct BallSettledEvent : IEvent
     {
         public Vector3 Position;
 

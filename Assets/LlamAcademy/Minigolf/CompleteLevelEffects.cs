@@ -15,7 +15,8 @@ namespace LlamAcademy.Minigolf
 
         private void HandleOnBallInHole(BallInHoleEvent evt)
         {
-            int scoreEffectCount = (int)evt.PlayerScore;
+            // TODO: calculate from par
+            int scoreEffectCount = (int)evt.Strokes;
             for (int i = 0; i < scoreEffectCount; i++)
             {
                 Effects[i].enabled = true;

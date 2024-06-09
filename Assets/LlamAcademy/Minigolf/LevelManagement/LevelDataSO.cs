@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
     [CreateAssetMenu(fileName = "Level Data", menuName = "Level Data")]
     public class LevelDataSO : ScriptableObject

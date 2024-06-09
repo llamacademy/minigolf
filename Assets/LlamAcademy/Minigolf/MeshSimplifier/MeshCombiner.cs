@@ -225,7 +225,7 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
                 if (showCreatedMeshInfo)
                 {
-                    Debug.Log($"<color=#ff3300><b>Mesh \"{name}\" was created from {combineInstances.Length} " +
+                    Debug.Log($"<color=#00ff00><b>Mesh \"{name}\" was created from {combineInstances.Length} " +
                               $"child meshes and has {verticesLength} vertices. " +
                               $"Combine Mesh Index {combineIndex}</color>");
                 }

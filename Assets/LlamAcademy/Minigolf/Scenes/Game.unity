@@ -1411,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 5846497214209583155, guid: 287271903258aab4e91fec08ee690136, type: 3}
+      propertyPath: m_TagString
+      value: Ball
+      objectReference: {fileID: 0}
     - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
       propertyPath: m_Drag
       value: 1

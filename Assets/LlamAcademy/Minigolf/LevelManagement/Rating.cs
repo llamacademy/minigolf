@@ -1,4 +1,4 @@
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
     public enum Rating
     {

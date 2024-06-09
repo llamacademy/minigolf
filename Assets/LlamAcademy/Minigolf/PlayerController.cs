@@ -1,5 +1,6 @@
-using System;
 using Cinemachine;
+using LlamAcademy.Minigolf.Bus;
+using LlamAcademy.Minigolf.Bus.Events;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UI;
@@ -21,6 +22,9 @@ namespace LlamAcademy.Minigolf
         private Vector2 InitialTouchPosition;
         private bool ShouldShowPower;
 
+        private Vector3 LastBallPosition;
+        private bool WaitingForBallToSettle;
+
         private void Awake()
         {
             Camera = GetComponent<Camera>();
@@ -28,12 +32,34 @@ namespace LlamAcademy.Minigolf
 
         private void Start()
         {
-            // these need testing
+            LastBallPosition = Ball.transform.position;
             // TouchSimulation.Enable(); apparently doesn't work in Unity 6, but with monobehavior it does
             EnhancedTouchSupport.Enable();
             Touch.onFingerDown += TouchOnFingerDown;
             Touch.onFingerMove += TouchOnFingerMove;
             Touch.onFingerUp += TouchOnFingerUp;
+
+            EventBus<BallExitedLevelBoundsEvent>.OnEvent += OnBallExitedLevelBounds;
+            EventBus<BallSettledEvent>.OnEvent += OnBallSettled;
+            EventBus<BallInHoleEvent>.OnEvent += OnBallInHoleEvent;
+        }
+
+        private void OnBallInHoleEvent(BallInHoleEvent evt)
+        {
+            enabled = false;
+        }
+
+        private void OnBallSettled(BallSettledEvent evt)
+        {
+            LastBallPosition = evt.Position;
+            WaitingForBallToSettle = false;
+        }
+
+        private void OnBallExitedLevelBounds(BallExitedLevelBoundsEvent evt)
+        {
+            Ball.angularVelocity = Vector3.zero;
+            Ball.linearVelocity = Vector3.zero;
+            Ball.transform.position = LastBallPosition;
         }
 
         private void OnDisable()
@@ -41,16 +67,24 @@ namespace LlamAcademy.Minigolf
             Touch.onFingerDown -= TouchOnFingerDown;
             Touch.onFingerMove -= TouchOnFingerMove;
             Touch.onFingerUp -= TouchOnFingerUp;
+            EventBus<BallExitedLevelBoundsEvent>.OnEvent -= OnBallExitedLevelBounds;
+            EventBus<BallSettledEvent>.OnEvent -= OnBallSettled;
         }
 
         private void TouchOnFingerUp(Finger finger)
         {
             RotationInputProvider.enabled = false;
             if (!ShouldShowPower || PowerImage.rectTransform.sizeDelta.magnitude < 0.01f) return;
+
             PowerImage.gameObject.SetActive(false);
+
+            EventBus<PlayerStrokeEvent>.Raise(new PlayerStrokeEvent(Ball.transform.position, Putts));
+            WaitingForBallToSettle = true;
+
             Vector3 forceDirection = (Ball.transform.position - transform.position).normalized;
             forceDirection.y = 0;
             Ball.AddForce(MaxForce * GetForce(finger) * forceDirection);
+
             Putts++;
         }
 
@@ -76,7 +110,7 @@ namespace LlamAcademy.Minigolf
                 return;
             }
 
-            if (Ball.linearVelocity.magnitude > 0.01f)
+            if (WaitingForBallToSettle)
             {
                 ShouldShowPower = false;
                 return;

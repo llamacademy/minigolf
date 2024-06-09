@@ -1,4 +1,4 @@
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
     [System.Serializable]
     public class Par

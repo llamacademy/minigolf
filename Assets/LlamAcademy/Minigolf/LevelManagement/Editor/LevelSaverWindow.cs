@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +8,7 @@ using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace LlamAcademy.Minigolf.Editor
+namespace LlamAcademy.Minigolf.LevelManagement.Editor
 {
     public class LevelSaverWindow : EditorWindow
     {
@@ -102,9 +101,9 @@ namespace LlamAcademy.Minigolf.Editor
 
         private void OnDisable()
         {
-            loadFileValue = LoadFileField.value;
-            fileName = FileNameInput.value;
-            directoryPath = DirectoryInput.value;
+            loadFileValue = LoadFileField?.value;
+            fileName = FileNameInput?.value;
+            directoryPath = DirectoryInput?.value;
         }
 
         private void OnFocus()

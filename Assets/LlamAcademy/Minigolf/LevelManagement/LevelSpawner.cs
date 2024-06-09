@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
     public class LevelSpawner : MonoBehaviour
     {
@@ -44,6 +44,11 @@ namespace LlamAcademy.Minigolf
             Ball.useGravity = true;
             Ball.GetComponent<Collider>().enabled = true;
             Controller.enabled = true;
+
+            GameObject levelBoundsGO = new GameObject("Level Bounds");
+            levelBoundsGO.AddComponent<BoxCollider>();
+            LevelBounds levelBounds = levelBoundsGO.AddComponent<LevelBounds>();
+            levelBounds.Resize(Tilemap.transform);
         }
 
         private void SetupLevel()
@@ -77,13 +82,11 @@ namespace LlamAcademy.Minigolf
 
                 StartCoroutine(AnimateIn(instance.transform, baseDelay * index));
                 index++;
-
             }
         }
 
         private IEnumerator AnimateIn(Transform transform, float delay)
         {
-            Vector3 spawnLocation = transform.position;
             Vector3 targetLocation = transform.position + Vector3.up;
             yield return new WaitForSeconds(delay);
             float time = 0;

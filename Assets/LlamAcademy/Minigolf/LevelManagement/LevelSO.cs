@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
     public class LevelSO : ScriptableObject
     {

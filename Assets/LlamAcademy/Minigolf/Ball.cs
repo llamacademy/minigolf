@@ -41,6 +41,8 @@ namespace LlamAcademy.Minigolf
         private IEnumerator ListenForBallSettling()
         {
             WaitForFixedUpdate waitForFixedUpdate = new ();
+            yield return null;
+            yield return waitForFixedUpdate;
             while (Rigidbody.linearVelocity.magnitude >= SettledVelocity)
             {
                 yield return waitForFixedUpdate;

@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace LlamAcademy.Minigolf
+namespace LlamAcademy.Minigolf.LevelManagement
 {
-    [System.Serializable]
+    [Serializable]
     public class PrefabSpawnData : IComparable<PrefabSpawnData>
     {
         public string PrefabResourcePath;
