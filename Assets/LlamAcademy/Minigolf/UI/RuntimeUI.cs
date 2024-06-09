@@ -3,8 +3,10 @@ using System.Linq;
 using LlamAcademy.Minigolf.Bus;
 using LlamAcademy.Minigolf.Bus.Events;
 using LlamAcademy.Minigolf.LevelManagement;
+using LlamAcademy.Minigolf.Persistence;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
@@ -45,11 +47,14 @@ namespace LlamAcademy.Minigolf.UI
         private Par OkRating;
         private Par FailRating;
 
+        private PlayerLevelCompletionData LevelCompletionData;
+
         private void Awake()
         {
             Document = GetComponent<UIDocument>();
 
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"));
+            LevelCompletionData = SavedDataService.LoadData();
+            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelCompletionData);
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             ResumeButton.RegisterCallback<ClickEvent>(ResumeGame);
@@ -90,10 +95,27 @@ namespace LlamAcademy.Minigolf.UI
             // Small delay for the win effect to play
             yield return new WaitForSeconds(1f);
 
+            string levelName = LevelData.Level.name;
+            if (LevelCompletionData.LevelSaveData.TryGetValue(levelName, out int bestScore) && bestScore > CurrentStrokes)
+            {
+                UpdateSaveData(levelName);
+            }
+            else if (LevelCompletionData.LevelSaveData.TryAdd(levelName, CurrentStrokes))
+            {
+                UpdateSaveData(levelName);
+            }
+
             // you can add a more fancy end game screen, for our microgame we'll just show the pause menu without
             // a resume option
             ResumeButton.RemoveFromHierarchy();
             ShowMenu(null);
+        }
+
+        private void UpdateSaveData(string levelName)
+        {
+            LevelCompletionData.LevelSaveData[levelName] = CurrentStrokes;
+            LevelSelectionModal.UpdateLevelLabels(LevelCompletionData);
+            SavedDataService.SaveData(LevelCompletionData);
         }
 
         private void ResetLevel(ClickEvent evt)

@@ -1,5 +1,6 @@
 using Cinemachine;
 using LlamAcademy.Minigolf.LevelManagement;
+using LlamAcademy.Minigolf.Persistence;
 using LlamAcademy.Minigolf.UI.Modals.About;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
 using UnityEngine;
@@ -26,6 +27,7 @@ namespace LlamAcademy.Minigolf.UI
         private LevelSelection LevelSelectionModal;
         private About AboutModal;
         private CinemachineOrbitalTransposer Transposer;
+        private PlayerLevelCompletionData LevelCompletionData;
 
         private void Awake()
         {
@@ -35,12 +37,15 @@ namespace LlamAcademy.Minigolf.UI
             AboutGameButton.RegisterCallback<ClickEvent>(ShowAboutGamePopup);
             ExitGameButton.RegisterCallback<ClickEvent>(ExitGame);
 
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"));
+            LevelCompletionData = SavedDataService.LoadData();
+
+            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelCompletionData);
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
 
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             Transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+
         }
 
         private void OnLevelSelected(LevelSO levelData)

@@ -15,10 +15,12 @@ namespace LlamAcademy.Minigolf.UI.Components
         private Label ScoreLabel;
         private Label ParLabel;
         private LevelSO Level;
+        private int? BestScore;
 
-        public UILevel(VisualElement root, LevelSO level)
+        public UILevel(VisualElement root, LevelSO level, int? bestScore = null)
         {
             Level = level;
+            BestScore = bestScore;
             Initialize(root);
         }
 
@@ -29,7 +31,8 @@ namespace LlamAcademy.Minigolf.UI.Components
             ParLabel = Root.Q<Label>("par");
 
             LevelLabel.text = Level.name;
-            ScoreLabel.text = "-"; // todo: set score from save
+            ScoreLabel.text = BestScore == null ? "-" : BestScore.ToString();
+
             if (Level.Par == null || Level.Par.Length != 4)
             {
                 Debug.LogError($"Incorrect Par configured for {Level.name}! This is a configuration error that will break the game.");

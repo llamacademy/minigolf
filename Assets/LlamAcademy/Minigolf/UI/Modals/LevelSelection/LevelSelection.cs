@@ -18,8 +18,9 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
 
         private List<UILevel> UILevels;
         private bool IsDragging;
+        private PlayerLevelCompletionData LevelCompletionData;
 
-        public LevelSelection(VisualElement root)
+        public LevelSelection(VisualElement root, PlayerLevelCompletionData data)
         {
             HideOnAwake = true;
             IsOverlay = true;
@@ -27,6 +28,7 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
             LevelPrefab = Resources.Load<VisualTreeAsset>("UILevel");
             AvailableLevels = new List<LevelSO>(Resources.LoadAll<LevelSO>("Levels/"));
 
+            LevelCompletionData = data;
             Initialize(root);
         }
 
@@ -40,7 +42,14 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
             {
                 VisualElement uiLevelRoot = new();
                 LevelPrefab.CloneTree(uiLevelRoot);
-                UILevel uiLevel = new(uiLevelRoot, level);
+                int? bestScore = null;
+
+                if (LevelCompletionData.LevelSaveData.TryGetValue(level.name, out int levelScore))
+                {
+                    bestScore = levelScore;
+                }
+
+                UILevel uiLevel = new(uiLevelRoot, level, bestScore);
 
                 uiLevel.Root.RegisterCallback<ClickEvent, LevelSO>(HandleUIClick, level);
 
@@ -51,6 +60,15 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
                 ScrollView.Add(uiLevel.Root);
                 UILevels.Add(uiLevel);
             }
+        }
+
+        public void UpdateLevelLabels(PlayerLevelCompletionData data)
+        {
+            LevelCompletionData = data;
+
+            UILevels.Clear();
+            ScrollView.Clear();
+            SetVisualElements();
         }
 
         private void HandleUIClick(ClickEvent evt, LevelSO levelData)
