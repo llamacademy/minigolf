@@ -133,6 +133,16 @@ Button.danger:hover:focus {
     -unity-text-align: middle-center;
 }
 
+.container {
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 525px;
+    width: 300px;
+    padding: 12px;
+    border-radius: 8px;
+    background-color: var(--background--light);
+}
 
 .visible {
     opacity: 1;
@@ -145,4 +155,11 @@ Button.danger:hover:focus {
     scale: 0;
 
     transition: all ease-in-out 250ms;
+}
+
+#logo {
+    background-image: url("/Assets/LlamAcademy/Minigolf/UI/Textures/Logo.png");
+    height: 300px;
+    width: 300px;
+    align-self: center;
 }

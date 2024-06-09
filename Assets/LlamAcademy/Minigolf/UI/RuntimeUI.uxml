@@ -1,0 +1,40 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Runtime%20Styles.uss?fileID=7433441132597879392&amp;guid=d09d83a55b3c13c458f4fed042415682&amp;type=3#Runtime Styles" />
+    <ui:Template name="LevelSelectionModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uxml" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:VisualElement name="menu-container" class="container hidden">
+            <ui:VisualElement name="logo" />
+            <ui:Button text="Resume" name="resume-button" class="primary" />
+            <ui:Button text="Reset" name="reset-button" class="danger" />
+            <ui:Button text="Level Select" name="level-selection-button" class="secondary" />
+            <ui:Button text="Main Menu" name="main-menu-button" class="secondary" />
+        </ui:VisualElement>
+        <ui:VisualElement class="rating-container">
+            <ui:VisualElement class="current-strokes">
+                <ui:Label text="Strokes" />
+                <ui:Label name="current-strokes" text="0"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="stars-3">
+                <ui:VisualElement name="stars-3-icon" class="icon" style="background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/rating-stars-3.png?fileID=-829819273&amp;guid=aef47515a452f9047a5499331f5f6333&amp;type=3#3-stars&quot;);" />
+                <ui:Label name="stars-3-par" text="1" />
+            </ui:VisualElement>
+            <ui:VisualElement class="stars-2">
+                <ui:VisualElement name="stars-2-icon" class="icon" style="background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/rating-stars-3.png?fileID=1283188244&amp;guid=aef47515a452f9047a5499331f5f6333&amp;type=3#2-stars&quot;);" />
+                <ui:Label name="stars-2-par" text="2" />
+            </ui:VisualElement>
+            <ui:VisualElement class="stars-1">
+                <ui:VisualElement name="stars-1-icon" class="icon" style="background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/rating-stars-3.png?fileID=-608842173&amp;guid=aef47515a452f9047a5499331f5f6333&amp;type=3#1-star&quot;);" />
+                <ui:Label name="stars-1-par" text="3" />
+            </ui:VisualElement>
+            <ui:VisualElement class="stars-0">
+                <ui:VisualElement name="stars-0-icon" class="icon">
+                    <ui:VisualElement name="stars-0-icon-bar" />
+                </ui:VisualElement>
+                <ui:Label name="stars-0-par" text="5" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:Button text="||" name="menu-button" class="secondary float-top-right" />
+        <ui:Instance template="LevelSelectionModal" name="level-selection" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
+    </ui:VisualElement>
+</ui:UXML>

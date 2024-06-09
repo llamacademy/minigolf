@@ -3,23 +3,6 @@
     width: 100%;
     justify-content: center;
 }
-.container {
-    align-self: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 525px;
-    width: 300px;
-    padding: 12px;
-    border-radius: 8px;
-    background-color: var(--background--light);
-}
-
-#logo {
-    background-image: url("/Assets/LlamAcademy/Minigolf/UI/Textures/Logo.png");
-    height: 300px;
-    width: 300px;
-    align-self: center;
-}
 
 .header {
     color: var(--secondary);

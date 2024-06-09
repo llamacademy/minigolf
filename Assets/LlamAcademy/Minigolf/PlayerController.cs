@@ -28,20 +28,35 @@ namespace LlamAcademy.Minigolf
         private void Awake()
         {
             Camera = GetComponent<Camera>();
+            EnhancedTouchSupport.Enable();
+        }
+
+        private void OnEnable()
+        {
+            Touch.onFingerDown += TouchOnFingerDown;
+            Touch.onFingerMove += TouchOnFingerMove;
+            Touch.onFingerUp += TouchOnFingerUp;
         }
 
         private void Start()
         {
             LastBallPosition = Ball.transform.position;
             // TouchSimulation.Enable(); apparently doesn't work in Unity 6, but with monobehavior it does
-            EnhancedTouchSupport.Enable();
-            Touch.onFingerDown += TouchOnFingerDown;
-            Touch.onFingerMove += TouchOnFingerMove;
-            Touch.onFingerUp += TouchOnFingerUp;
-
             EventBus<BallExitedLevelBoundsEvent>.OnEvent += OnBallExitedLevelBounds;
             EventBus<BallSettledEvent>.OnEvent += OnBallSettled;
             EventBus<BallInHoleEvent>.OnEvent += OnBallInHoleEvent;
+            EventBus<PauseEvent>.OnEvent += HandlePause;
+            EventBus<ResumeEvent>.OnEvent += HandleResume;
+        }
+
+        private void HandleResume(ResumeEvent evt)
+        {
+            enabled = true;
+        }
+
+        private void HandlePause(PauseEvent evt)
+        {
+            enabled = false;
         }
 
         private void OnBallInHoleEvent(BallInHoleEvent evt)
@@ -51,7 +66,7 @@ namespace LlamAcademy.Minigolf
 
         private void OnBallSettled(BallSettledEvent evt)
         {
-            LastBallPosition = evt.Position;
+            LastBallPosition = evt.Position + Vector3.up * 0.5f;
             WaitingForBallToSettle = false;
         }
 
@@ -67,8 +82,15 @@ namespace LlamAcademy.Minigolf
             Touch.onFingerDown -= TouchOnFingerDown;
             Touch.onFingerMove -= TouchOnFingerMove;
             Touch.onFingerUp -= TouchOnFingerUp;
+        }
+
+        private void OnDestroy()
+        {
             EventBus<BallExitedLevelBoundsEvent>.OnEvent -= OnBallExitedLevelBounds;
             EventBus<BallSettledEvent>.OnEvent -= OnBallSettled;
+            EventBus<BallInHoleEvent>.OnEvent -= OnBallInHoleEvent;
+            EventBus<PauseEvent>.OnEvent -= HandlePause;
+            EventBus<ResumeEvent>.OnEvent -= HandleResume;
         }
 
         private void TouchOnFingerUp(Finger finger)
