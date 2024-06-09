@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Ball
+  - ExcludeFromCombine
   layers:
   - Default
   - TransparentFX

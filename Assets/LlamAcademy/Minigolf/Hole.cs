@@ -1,3 +1,4 @@
+using System;
 using LlamAcademy.Minigolf.Bus;
 using LlamAcademy.Minigolf.Bus.Events;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace LlamAcademy.Minigolf
     [RequireComponent(typeof(Collider))]
     public class Hole : MonoBehaviour
     {
+        [SerializeField] private ParticleSystem WinParticles;
         private int StrokeCount;
 
         private int FailingStrokes;
@@ -26,6 +28,7 @@ namespace LlamAcademy.Minigolf
             if (other.CompareTag("Ball"))
             {
                 EventBus<BallInHoleEvent>.Raise(new BallInHoleEvent(transform.position, StrokeCount));
+                WinParticles.Play();
             }
         }
     }

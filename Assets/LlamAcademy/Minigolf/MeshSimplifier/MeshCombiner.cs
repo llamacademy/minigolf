@@ -117,6 +117,8 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
             #endregion Save Transform and reset it temporarily.
 
+            UnparentExcludedChildren(transform);
+
             DoCombineMeshes(showCreatedMeshInfo);
 
             #region Set old Transform values:
@@ -143,11 +145,15 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
             // exclude current object's mesh filter and any null values. Ideally you don't have one here.
             meshFilters = meshFilters
-                .Where((meshFilter) => meshFilter != currentObjectFilter && meshFilter.mesh != null && meshFilter.mesh.colors.Length != 0).ToArray();
+                .Where((meshFilter) => meshFilter != currentObjectFilter
+                                       && meshFilter.mesh != null
+                                       && meshFilter.mesh.colors.Length != 0
+                ).ToArray();
 
             totalMeshCount = meshFilters.Length;
 
-            return meshFilters.GroupBy(meshFilter => meshFilter.mesh.colors[0]).ToDictionary(keySelector => keySelector.Key, filters => filters.ToArray());
+            return meshFilters.GroupBy(meshFilter => meshFilter.mesh.colors[0])
+                .ToDictionary(keySelector => keySelector.Key, filters => filters.ToArray());
         }
 
         private void DoCombineMeshes(bool showCreatedMeshInfo)
@@ -177,9 +183,11 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
                     if (!CombineIndexToPhysicMaterial.ContainsKey(subMeshIndex) &&
                         filter.TryGetComponent(out Collider collider))
                     {
-                        Debug.Log($"Found physic material {collider.sharedMaterial.name} for submesh index {subMeshIndex}");
+                        Debug.Log(
+                            $"Found physic material {collider.sharedMaterial.name} for submesh index {subMeshIndex}");
                         CombineIndexToPhysicMaterial.Add(subMeshIndex, collider.sharedMaterial);
                     }
+
                     combineIndex++;
                 }
 
@@ -212,7 +220,7 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
                 combinedMesh.CombineMeshes(relevantCombineInstances);
                 // GenerateUV(combinedMesh); // only works in editor
 
-                GameObject child = new ($"Child Mesh Index {combineIndex}");
+                GameObject child = new($"Child Mesh Index {combineIndex}");
                 MeshFilter filter = child.AddComponent<MeshFilter>();
                 filter.sharedMesh = combinedMesh;
                 MeshCollider collider = child.AddComponent<MeshCollider>();
@@ -232,7 +240,6 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
 
                 combineIndex++;
             }
-
         }
 
         private void DeactivateCombinedGameObjects(Dictionary<Color, MeshFilter[]> meshFilterGrouping)
@@ -245,7 +252,8 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
                     {
                         if (keyValuePair.Value[i].TryGetComponent(out Collider collider))
                         {
-                            collider.enabled = false; // since we're creating a new collider, we definitely don't want the old one
+                            collider.enabled =
+                                false; // since we're creating a new collider, we definitely don't want the old one
                         }
 
                         if (deactivateCombinedChildren)
@@ -264,12 +272,34 @@ namespace LlamAcademy.Minigolf.MeshSimplifier
                     }
                     else
                     {
-                        #if UNITY_EDITOR
+#if UNITY_EDITOR
                         DestroyImmediate(keyValuePair.Value[i].gameObject);
-                        #else
+#else
                         Destroy(keyValuePair.Value[i].gameObject);
-                        #endif
+#endif
                     }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Recursively checks all children for the "ExcludeFromCombine" tag and unparents them so they are excluded from
+        /// combination or accidental destruction / deactivation
+        /// </summary>
+        /// <param name="parent"></param>
+        private void UnparentExcludedChildren(Transform parent)
+        {
+            for (int i = parent.childCount - 1; i >= 0; i--)
+            {
+                Transform child = parent.GetChild(i);
+                if (child.CompareTag("ExcludeFromCombine"))
+                {
+                    child.transform.SetParent(null, true);
+                }
+                else if (child.childCount != 0)
+                {
+                    UnparentExcludedChildren(child);
                 }
             }
         }
