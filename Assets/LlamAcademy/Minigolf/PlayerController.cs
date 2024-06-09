@@ -124,7 +124,7 @@ namespace LlamAcademy.Minigolf
             Ray cameraRay = Camera.ScreenPointToRay(finger.screenPosition);
             InitialTouchPosition = finger.screenPosition;
 
-            if (!Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, LayerMask.GetMask("Ball"))
+            if (!Physics.Raycast(cameraRay, out RaycastHit hit, float.MaxValue, LayerMask.GetMask("Ball"), QueryTriggerInteraction.Collide)
                 || hit.transform != Ball.transform)
             {
                 RotationInputProvider.enabled = true;

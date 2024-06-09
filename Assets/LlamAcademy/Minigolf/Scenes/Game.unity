@@ -689,11 +689,6 @@ MonoBehaviour:
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
---- !u!1 &377837726 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5846497214209583155, guid: 287271903258aab4e91fec08ee690136, type: 3}
-  m_PrefabInstance: {fileID: 5783006650554658536}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &387697262
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,19 +1350,6 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
   m_PrefabInstance: {fileID: 5783006650554658536}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1515914408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377837726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 957b5e05e21845f8a1d244251743c49d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SettledVelocity: 0.01
 --- !u!1 &1587577580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,22 +1476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      propertyPath: m_AngularDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      propertyPath: m_Interpolate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6070209295304917794, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6607145614679163166, guid: 287271903258aab4e91fec08ee690136, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -1553,10 +1519,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5846497214209583155, guid: 287271903258aab4e91fec08ee690136, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1515914408}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 287271903258aab4e91fec08ee690136, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
