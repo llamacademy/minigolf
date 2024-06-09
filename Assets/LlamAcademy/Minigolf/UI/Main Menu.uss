@@ -6,6 +6,6 @@
 
 .header {
     color: var(--secondary);
-    font-size: 36px;
+    font-size: var(--font-size--large);
     -unity-text-align: middle-center;
 }

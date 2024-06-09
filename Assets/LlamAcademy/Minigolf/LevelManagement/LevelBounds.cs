@@ -31,7 +31,7 @@ namespace LlamAcademy.Minigolf.LevelManagement
 
 
             bounds.min -= new Vector3(2, 2, 2);
-            bounds.max += new Vector3(2, 2, 2);
+            bounds.max += new Vector3(2, 10, 2);
 
             Collider.center = bounds.center;
             Collider.size = bounds.size;

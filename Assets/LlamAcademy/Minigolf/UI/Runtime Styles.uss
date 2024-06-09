@@ -37,7 +37,6 @@
 
 .rating-container Label {
     color: var(--secondary--light);
-    font-size: 18px;
     -unity-text-align: middle-left;
     margin-left: 5px;
     flex-grow: 1;
@@ -76,6 +75,7 @@
 }
 
 .rating-container .current-strokes Label {
+    font-size: var(--font-size--small);
     margin: 0;
     padding: 0;
     padding-right: 15px;

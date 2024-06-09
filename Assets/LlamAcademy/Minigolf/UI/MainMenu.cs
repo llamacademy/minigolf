@@ -31,6 +31,7 @@ namespace LlamAcademy.Minigolf.UI
 
         private void Awake()
         {
+            Application.targetFrameRate = 30;
             Document = GetComponent<UIDocument>();
 
             PlayGameButton.RegisterCallback<ClickEvent>(ShowLevelPopup);
@@ -39,13 +40,17 @@ namespace LlamAcademy.Minigolf.UI
 
             LevelCompletionData = SavedDataService.LoadData();
 
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelCompletionData);
+            if (LevelData.AllLevels.Length == 0)
+            {
+                LevelData.AllLevels = Resources.LoadAll<LevelSO>("Levels/");
+            }
+
+            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
 
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             Transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
-
         }
 
         private void OnLevelSelected(LevelSO levelData)

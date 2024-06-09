@@ -13,14 +13,16 @@
     --danger--dark: #8a0000;
     --font-size--large: 36px;
     --font-size--medium: 24px;
-    --font-size-regular: 18px;
-    --font-size-small: 12px;
+    --font-size--regular: 18px;
+    --font-size--small: 12px;
 
     -unity-font-definition: resource("Fonts & Materials/ComicHelvetic_Medium");
+    font-size: var(--font-size--regular);
 }
 
 Label {
     color: var(--secondary);
+    font-size: var(--font-size--regular);
 }
 Button {
     margin-bottom: 12px;
@@ -137,7 +139,7 @@ Button.danger:hover:focus {
     align-self: center;
     margin-top: auto;
     margin-bottom: auto;
-    height: 525px;
+    height: 650px;
     width: 300px;
     padding: 12px;
     border-radius: 8px;

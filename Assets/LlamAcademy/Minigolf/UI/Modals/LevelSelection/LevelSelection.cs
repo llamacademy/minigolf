@@ -11,7 +11,7 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         private ScrollView ScrollView;
         private Label CloseButton;
         private VisualTreeAsset LevelPrefab;
-        private List<LevelSO> AvailableLevels;
+        private LevelSO[] AvailableLevels;
 
         public delegate void LevelSelectedEvent(LevelSO levelData);
         public event LevelSelectedEvent OnLevelSelected;
@@ -20,13 +20,13 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
         private bool IsDragging;
         private PlayerLevelCompletionData LevelCompletionData;
 
-        public LevelSelection(VisualElement root, PlayerLevelCompletionData data)
+        public LevelSelection(VisualElement root, LevelSO[] availableLevels, PlayerLevelCompletionData data)
         {
             HideOnAwake = true;
             IsOverlay = true;
 
             LevelPrefab = Resources.Load<VisualTreeAsset>("UILevel");
-            AvailableLevels = new List<LevelSO>(Resources.LoadAll<LevelSO>("Levels/"));
+            AvailableLevels = availableLevels;
 
             LevelCompletionData = data;
             Initialize(root);
@@ -34,7 +34,7 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
 
         protected override void SetVisualElements()
         {
-            UILevels = new List<UILevel>(AvailableLevels.Count);
+            UILevels = new List<UILevel>(AvailableLevels.Length);
             ScrollView = Root.Q<ScrollView>();
             CloseButton = Root.Q<Label>("close-button");
 
@@ -78,6 +78,11 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
 
         public override void Show()
         {
+            // appears to be some bug in Unity 6 / UITK that makes the visual elements sometimes...not show??
+            UILevels.Clear();
+            ScrollView.Clear();
+            SetVisualElements();
+
             base.Show();
             Root.pickingMode = PickingMode.Position;
         }

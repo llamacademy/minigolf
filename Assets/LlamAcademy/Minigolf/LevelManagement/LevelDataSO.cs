@@ -6,5 +6,7 @@ namespace LlamAcademy.Minigolf.LevelManagement
     public class LevelDataSO : ScriptableObject
     {
         public LevelSO Level;
+
+        public LevelSO[] AllLevels;
     }
 }

@@ -6,9 +6,9 @@ using LlamAcademy.Minigolf.LevelManagement;
 using LlamAcademy.Minigolf.Persistence;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using Debug = UnityEngine.Debug;
 
 namespace LlamAcademy.Minigolf.UI
 {
@@ -51,10 +51,11 @@ namespace LlamAcademy.Minigolf.UI
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             Document = GetComponent<UIDocument>();
 
             LevelCompletionData = SavedDataService.LoadData();
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelCompletionData);
+            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             ResumeButton.RegisterCallback<ClickEvent>(ResumeGame);
@@ -107,8 +108,11 @@ namespace LlamAcademy.Minigolf.UI
 
             // you can add a more fancy end game screen, for our microgame we'll just show the pause menu without
             // a resume option
-            ResumeButton.RemoveFromHierarchy();
-            ShowMenu(null);
+            if (ResumeButton != null)
+            {
+                ResumeButton.RemoveFromHierarchy();
+                ShowMenu(null);
+            }
         }
 
         private void UpdateSaveData(string levelName)
@@ -130,6 +134,7 @@ namespace LlamAcademy.Minigolf.UI
 
             if (CurrentStrokes == FailRating.Strokes)
             {
+                EventBus<BallSettledEvent>.OnEvent -= HandleFinalBallSettle;
                 EventBus<BallSettledEvent>.OnEvent += HandleFinalBallSettle;
             }
         }
