@@ -273,3 +273,12 @@ MonoBehaviour:
     Position: {x: -0.5, y: -2, z: 2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
+  Par:
+  - Rating: 3
+    Strokes: 2
+  - Rating: 2
+    Strokes: 3
+  - Rating: 1
+    Strokes: 4
+  - Rating: 0
+    Strokes: 6

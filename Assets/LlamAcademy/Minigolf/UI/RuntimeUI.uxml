@@ -34,6 +34,7 @@
                 <ui:Label name="stars-0-par" text="5" />
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Label name="level-label" class="header" text="Level X"/>
         <ui:Button text="||" name="menu-button" class="secondary float-top-right" />
         <ui:Instance template="LevelSelectionModal" name="level-selection" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
     </ui:VisualElement>

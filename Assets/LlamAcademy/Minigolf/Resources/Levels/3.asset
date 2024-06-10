@@ -171,10 +171,10 @@ MonoBehaviour:
     Scale: {x: 1, y: 1, z: 1}
   Par:
   - Rating: 3
-    Strokes: 1
-  - Rating: 2
-    Strokes: 2
-  - Rating: 1
     Strokes: 3
-  - Rating: 0
+  - Rating: 2
+    Strokes: 4
+  - Rating: 1
     Strokes: 5
+  - Rating: 0
+    Strokes: 7

@@ -28,6 +28,7 @@ namespace LlamAcademy.Minigolf.UI
         private Label Stars2RatingLabel => Document.rootVisualElement.Q<Label>("stars-2-par");
         private Label Stars1RatingLabel => Document.rootVisualElement.Q<Label>("stars-1-par");
         private Label Stars0RatingLabel => Document.rootVisualElement.Q<Label>("stars-0-par");
+        private Label LevelLabel => Document.rootVisualElement.Q<Label>("level-label");
 
         private Label CurrentStrokesLabel => Document.rootVisualElement.Q<Label>("current-strokes");
 
@@ -80,6 +81,8 @@ namespace LlamAcademy.Minigolf.UI
             Stars2RatingLabel.text = GoodRating.Strokes.ToString();
             Stars1RatingLabel.text = OkRating.Strokes.ToString();
             Stars0RatingLabel.text = FailRating.Strokes.ToString();
+
+            LevelLabel.text = $"Level <b>{LevelData.Level.name}</b>";
 
             EventBus<PlayerStrokeEvent>.OnEvent += HandlePlayerStroke;
             EventBus<BallInHoleEvent>.OnEvent += HandleEndLevel;
