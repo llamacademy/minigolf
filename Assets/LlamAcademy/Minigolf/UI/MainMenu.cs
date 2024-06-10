@@ -43,6 +43,7 @@ namespace LlamAcademy.Minigolf.UI
             if (LevelData.AllLevels.Length == 0)
             {
                 LevelData.AllLevels = Resources.LoadAll<LevelSO>("Levels/");
+                System.Array.Sort(LevelData.AllLevels, (a,b) => a.name.CompareTo(b.name));
             }
 
             LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);

@@ -42,7 +42,7 @@ namespace LlamAcademy.Minigolf.LevelManagement.Editor
         public void CreateGUI()
         {
             VisualElement root = rootVisualElement;
-            VisualTreeAsset asset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/LlamAcademy/Minigolf/Editor/LevelSaverWindow.uxml");
+            VisualTreeAsset asset = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/LlamAcademy/Minigolf/LevelManagement/Editor/LevelSaverWindow.uxml");
             asset.CloneTree(root);
 
             SaveButton.RegisterCallback<ClickEvent>(SaveToFile);

@@ -8,7 +8,7 @@
     <engine:Label name="override-file-warning" text="File already exists at this path. Saving will overwrite!" class="warning" />
     <engine:Button text="Save To File" name="save-button" />
     <engine:Label text="Load From Save" class="header" />
-    <editor:ObjectField name="load-file-field" label="File" type="LlamAcademy.Minigolf.LevelSO, LlamAcademy.Minigolf" />
+    <editor:ObjectField name="load-file-field" label="File" type="LlamAcademy.Minigolf.LevelManagement.LevelSO, LlamAcademy.Minigolf" />
     <engine:VisualElement class="flex-row flex-wrap space-between warning">
         <engine:Label text="Warning: Loading the file will destroy any scene changes!" />
         <engine:Button text="Load File" name="load-button" class="pull-right" />

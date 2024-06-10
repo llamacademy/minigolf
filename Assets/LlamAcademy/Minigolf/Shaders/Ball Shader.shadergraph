@@ -88,9 +88,6 @@
             "m_Id": "54de9538ba6d47bfafb63bc60e0af081"
         },
         {
-            "m_Id": "9e4896712dd748e0ad19595bfc870178"
-        },
-        {
             "m_Id": "75c1892b1be343bbbc407b07079b84b6"
         },
         {
@@ -1274,21 +1271,6 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "5bd819177bc6413da1ca4f75b0296930",
-    "m_Id": 0,
-    "m_DisplayName": "ShadowStrength",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": 0.0,
-    "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "5d8527ecaafe4c3f8e4fb7bce21acd93",
     "m_Id": 2,
     "m_DisplayName": "CellDensity",
@@ -2050,42 +2032,6 @@
     "m_PreviewMode": 0,
     "m_CustomColors": {
         "m_SerializableColors": []
-    }
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "9e4896712dd748e0ad19595bfc870178",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1143.0,
-            "y": 613.9999389648438,
-            "width": 162.0,
-            "height": 34.00006103515625
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "5bd819177bc6413da1ca4f75b0296930"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "66e8ba5d322b4fb3a04e9394b6d0bfd3"
     }
 }
 
@@ -2869,7 +2815,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 1.0,
+    "m_Value": 0.5,
     "m_FloatType": 1,
     "m_RangeValues": {
         "x": 0.0,
