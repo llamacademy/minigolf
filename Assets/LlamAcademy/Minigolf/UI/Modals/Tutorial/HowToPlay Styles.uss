@@ -1,0 +1,5 @@
+.tutorial-text {
+    font-size: var(--font-size--medium);
+    -unity-text-align: middle-left;
+    -unity-paragraph-spacing: 150px;
+}

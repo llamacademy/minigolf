@@ -60,6 +60,8 @@ namespace LlamAcademy.Minigolf.UI.Modals.LevelSelection
                 ScrollView.Add(uiLevel.Root);
                 UILevels.Add(uiLevel);
             }
+
+            ScrollView.ScrollTo(UILevels[0].Root);
         }
 
         public void UpdateLevelLabels(PlayerLevelCompletionData data)

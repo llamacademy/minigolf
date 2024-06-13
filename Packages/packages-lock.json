@@ -27,15 +27,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.ai.navigation": {
-      "version": "2.0.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.ai": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.burst": {
       "version": "1.8.14",
       "depth": 2,
@@ -74,18 +65,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.dt.app-ui": {
-      "version": "1.0.3",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.androidjni": "1.0.0",
-        "com.unity.modules.uielements": "1.0.0",
-        "com.unity.modules.physics": "1.0.0",
-        "com.unity.modules.screencapture": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.ext.nunit": {
       "version": "2.0.5",
       "depth": 1,
@@ -99,15 +78,6 @@
       "source": "registry",
       "dependencies": {
         "com.unity.ext.nunit": "1.0.6"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.ide.visualstudio": {
-      "version": "2.0.22",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.9"
       },
       "url": "https://packages.unity.com"
     },
@@ -127,49 +97,11 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.muse.behavior": {
-      "version": "0.5.11",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.dt.app-ui": "1.0.2",
-        "com.unity.modules.unitywebrequest": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.ai": "1.0.0",
-        "com.unity.nuget.newtonsoft-json": "3.2.1"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.nuget.mono-cecil": {
       "version": "1.11.4",
       "depth": 3,
       "source": "registry",
       "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.nuget.newtonsoft-json": {
-      "version": "3.2.1",
-      "depth": 1,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.polybrush": {
-      "version": "1.1.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.settings-manager": "2.0.1"
-      },
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.postprocessing": {
-      "version": "3.4.0",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.physics": "1.0.0"
-      },
       "url": "https://packages.unity.com"
     },
     "com.unity.probuilder": {
@@ -287,18 +219,6 @@
       },
       "url": "https://packages.unity.com"
     },
-    "com.unity.timeline": {
-      "version": "1.8.6",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.modules.director": "1.0.0",
-        "com.unity.modules.animation": "1.0.0",
-        "com.unity.modules.audio": "1.0.0",
-        "com.unity.modules.particlesystem": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.unity.toolchain.win-x86_64-linux-x86_64": {
       "version": "2.0.4",
       "depth": 0,
@@ -318,22 +238,19 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.unity.visualscripting": {
-      "version": "1.9.4",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {
-        "com.unity.ugui": "1.0.0",
-        "com.unity.modules.jsonserialize": "1.0.0"
-      },
-      "url": "https://packages.unity.com"
-    },
     "com.whinarn.unitymeshsimplifier": {
       "version": "git@github.com:Whinarn/UnityMeshSimplifier.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
       "hash": "d741912bfeaad8da4fe0f258f4f3eefe1fe7b3f3"
+    },
+    "jillejr.newtonsoft.json-for-unity": {
+      "version": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f2c6cb09817832dccd0600f291053d8d55298ee9"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

@@ -22,10 +22,12 @@ namespace LlamAcademy.Minigolf.UI
         private UIDocument Document;
         private Button PlayGameButton => Document.rootVisualElement.Q<Button>("play-game-button");
         private Button AboutGameButton => Document.rootVisualElement.Q<Button>("about-game-button");
+        private Button TutorialButton => Document.rootVisualElement.Q<Button>("how-to-play-button");
         private Button ExitGameButton => Document.rootVisualElement.Q<Button>("exit-game-button");
 
         private LevelSelection LevelSelectionModal;
         private About AboutModal;
+        private HowToPlay TutorialModal;
         private CinemachineOrbitalTransposer Transposer;
         private PlayerLevelCompletionData LevelCompletionData;
 
@@ -36,6 +38,7 @@ namespace LlamAcademy.Minigolf.UI
 
             PlayGameButton.RegisterCallback<ClickEvent>(ShowLevelPopup);
             AboutGameButton.RegisterCallback<ClickEvent>(ShowAboutGamePopup);
+            TutorialButton.RegisterCallback<ClickEvent>(ShowTutorialPopup);
             ExitGameButton.RegisterCallback<ClickEvent>(ExitGame);
 
             LevelCompletionData = SavedDataService.LoadData();
@@ -48,7 +51,7 @@ namespace LlamAcademy.Minigolf.UI
 
             LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
-
+            TutorialModal = new HowToPlay(Document.rootVisualElement.Q<VisualElement>("tutorial"));
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             Transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
@@ -68,6 +71,11 @@ namespace LlamAcademy.Minigolf.UI
         private void ShowLevelPopup(ClickEvent _ = null)
         {
             LevelSelectionModal.Show();
+        }
+
+        private void ShowTutorialPopup(ClickEvent _ = null)
+        {
+            TutorialModal.Show();
         }
 
         private void ShowAboutGamePopup(ClickEvent _ = null)

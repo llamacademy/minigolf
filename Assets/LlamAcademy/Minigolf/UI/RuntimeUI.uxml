@@ -1,13 +1,12 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Runtime%20Styles.uss?fileID=7433441132597879392&amp;guid=d09d83a55b3c13c458f4fed042415682&amp;type=3#Runtime Styles" />
-    <ui:Template name="LevelSelectionModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uxml" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="menu-container" class="container hidden">
             <ui:VisualElement name="logo" />
             <ui:Button text="Resume" name="resume-button" class="primary" />
+            <ui:Button text="Next Level" name="next-level-button" class="secondary" />
             <ui:Button text="Reset" name="reset-button" class="danger" />
-            <ui:Button text="Level Select" name="level-selection-button" class="secondary" />
             <ui:Button text="Main Menu" name="main-menu-button" class="secondary" />
         </ui:VisualElement>
         <ui:VisualElement class="rating-container">
@@ -36,6 +35,5 @@
         </ui:VisualElement>
         <ui:Label name="level-label" class="header" text="Level X"/>
         <ui:Button text="||" name="menu-button" class="secondary float-top-right" />
-        <ui:Instance template="LevelSelectionModal" name="level-selection" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
     </ui:VisualElement>
 </ui:UXML>

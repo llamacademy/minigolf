@@ -20,7 +20,7 @@ namespace LlamAcademy.Minigolf.UI
         private VisualElement MenuContainer => Document.rootVisualElement.Q("menu-container");
         private Button ResumeButton => Document.rootVisualElement.Q<Button>("resume-button");
         private Button ResetButton => Document.rootVisualElement.Q<Button>("reset-button");
-        private Button LevelSelectButton => Document.rootVisualElement.Q<Button>("level-selection-button");
+        private Button NextLevelButton => Document.rootVisualElement.Q<Button>("next-level-button");
         private Button MainMenuButton => Document.rootVisualElement.Q<Button>("main-menu-button");
         private Button PauseButton => Document.rootVisualElement.Q<Button>("menu-button");
 
@@ -31,8 +31,6 @@ namespace LlamAcademy.Minigolf.UI
         private Label LevelLabel => Document.rootVisualElement.Q<Label>("level-label");
 
         private Label CurrentStrokesLabel => Document.rootVisualElement.Q<Label>("current-strokes");
-
-        private LevelSelection LevelSelectionModal;
 
         /// <summary>
         /// Both MainMenu and Game scenes should refer to this same single SO so they can use it to pass data between
@@ -56,11 +54,9 @@ namespace LlamAcademy.Minigolf.UI
             Document = GetComponent<UIDocument>();
 
             LevelCompletionData = SavedDataService.LoadData();
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);
-            LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
             ResumeButton.RegisterCallback<ClickEvent>(ResumeGame);
-            LevelSelectButton.RegisterCallback<ClickEvent>(ShowLevelSelection);
+            NextLevelButton.RegisterCallback<ClickEvent>(GoToNextLevel);
             MainMenuButton.RegisterCallback<ClickEvent>(ReturnToMainMenu);
             PauseButton.RegisterCallback<ClickEvent>(ShowMenu);
             ResetButton.RegisterCallback<ClickEvent>(ResetLevel);
@@ -84,13 +80,48 @@ namespace LlamAcademy.Minigolf.UI
 
             LevelLabel.text = $"Level <b>{LevelData.Level.name}</b>";
 
+            if (GetNextLevel() == null)
+            {
+                NextLevelButton.RemoveFromHierarchy();
+            }
+
             EventBus<PlayerStrokeEvent>.OnEvent += HandlePlayerStroke;
             EventBus<BallInHoleEvent>.OnEvent += HandleEndLevel;
+        }
+
+        private LevelSO GetNextLevel()
+        {
+            int level = int.Parse(LevelData.Level.name);
+            int nextLevel = level + 1;
+            return System.Array.Find(LevelData.AllLevels, (levelData) => levelData.name == nextLevel.ToString());
+        }
+
+        private void GoToNextLevel(ClickEvent evt)
+        {
+            LevelSO nextLevelData = GetNextLevel();
+
+            if (nextLevelData == null)
+            {
+                Debug.LogError("Player completed the game but next level button was still shown!");
+                SceneManager.LoadScene(Constants.MAIN_MENU_SCENE_NAME);
+            }
+            else
+            {
+                LevelData.Level = nextLevelData;
+                SceneManager.LoadScene(Constants.GAME_SCENE_NAME);
+            }
         }
 
         private void HandleEndLevel(BallInHoleEvent evt)
         {
             BallIsInHole = true;
+
+            if (NextLevelButton != null)
+            {
+                NextLevelButton.AddToClassList("primary");
+                NextLevelButton.RemoveFromClassList("secondary");
+            }
+
             StartCoroutine(HandleEndLevel());
         }
 
@@ -121,7 +152,6 @@ namespace LlamAcademy.Minigolf.UI
         private void UpdateSaveData(string levelName)
         {
             LevelCompletionData.LevelSaveData[levelName] = CurrentStrokes;
-            LevelSelectionModal.UpdateLevelLabels(LevelCompletionData);
             SavedDataService.SaveData(LevelCompletionData);
         }
 
@@ -169,12 +199,8 @@ namespace LlamAcademy.Minigolf.UI
             MenuContainer.AddToClassList("visible");
             MenuContainer.RemoveFromClassList("hidden");
             MenuContainer.pickingMode = PickingMode.Position;
-            EventBus<PauseEvent>.Raise(new PauseEvent());
-        }
 
-        private void ShowLevelSelection(ClickEvent evt)
-        {
-            LevelSelectionModal.Show();
+            EventBus<PauseEvent>.Raise(new PauseEvent());
         }
 
         private void ResumeGame(ClickEvent evt)
@@ -183,12 +209,6 @@ namespace LlamAcademy.Minigolf.UI
             MenuContainer.RemoveFromClassList("visible");
             MenuContainer.pickingMode = PickingMode.Position;
             EventBus<ResumeEvent>.Raise(new ResumeEvent());
-        }
-
-        private void OnLevelSelected(LevelSO levelData)
-        {
-            LevelData.Level = levelData;
-            SceneManager.LoadScene(Constants.GAME_SCENE_NAME);
         }
     }
 }

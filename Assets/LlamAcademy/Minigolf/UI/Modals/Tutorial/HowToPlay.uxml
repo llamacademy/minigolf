@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=60c1de3a44d20fb4c90fe92e9a2976dd&amp;type=3#Main Menu" />
+    <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Modals/Tutorial/HowToPlay%20Styles.uss?fileID=7433441132597879392&amp;guid=b486a0eb10d135d469094ea465aee6b8&amp;type=3#HowToPlay Styles" />
+    <ui:VisualElement name="root" style="flex-grow: 1;">
+        <ui:VisualElement name="container" class="container" style="height: 650px; width: 350px;">
+            <ui:Label text="How to Play" name="title" class="header" style="min-height: 50px;">
+                <ui:Label text="X" name="close-button" class="close-button" />
+            </ui:Label>
+            <ui:Label text="Tap and drag anywhere on the screen to rotate the camera.\r\nTap and drag down on the ball to increase the power. The brighter green and larger the arrow (the &quot;power meter&quot;), the harder the putt will be. Let go to putt the ball.\r\nTo cancel the putt, simply drag your finger up until the power meter is no longer displayed" parse-escape-sequences="true" display-tooltip-when-elided="true" class="tutorial-text" style="white-space: pre-wrap;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -78,14 +78,14 @@ namespace LlamAcademy.Minigolf.LevelManagement
 
                 Vector3 spawnLocation = data.Position + Vector3.up * AnimateInCurve.Evaluate(0);
                 GameObject instance = Instantiate(prefab, spawnLocation, data.Rotation, Tilemap.transform);
-                instance.transform.localScale = data.Scale;
+                instance.transform.localScale = Vector3.zero;
 
-                StartCoroutine(AnimateIn(instance.transform, baseDelay * index));
+                StartCoroutine(AnimateIn(instance.transform, data.Scale, baseDelay * index));
                 index++;
             }
         }
 
-        private IEnumerator AnimateIn(Transform transform, float delay)
+        private IEnumerator AnimateIn(Transform transform, Vector3 targetScale, float delay)
         {
             Vector3 targetLocation = transform.position + Vector3.up;
             yield return new WaitForSeconds(delay);
@@ -95,10 +95,12 @@ namespace LlamAcademy.Minigolf.LevelManagement
                 time += Time.deltaTime * AnimationSpeed;
                 float yOffset = AnimateInCurve.Evaluate(time);
                 transform.position = targetLocation + Vector3.up * yOffset;
+                transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, time);
                 yield return null;
             }
 
             transform.position = targetLocation;
+            transform.localScale = targetScale;
         }
 
         private void FindTilemap()
