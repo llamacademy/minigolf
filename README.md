@@ -1,33 +1,39 @@
-﻿# Show a NavMesh In Game
+﻿# Minigolf
 
-In this tutorial repository and [accompanying video](https://youtu.be/zxmz-LV6E6g) you will learn how you can generate a Mesh at runtime based on the [NavMesh Triangulation](https://docs.unity3d.com/ScriptReference/AI.NavMesh.CalculateTriangulation.html).
+A 10-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
 
-This can be used for debugging purposes or some cool ground-based shader effects. You will learn how to show the Navigation Mesh per agent type with the NavMeshSurface component from the [Navigation Components](https://docs.unity3d.com/Packages/com.unity.ai.navigation@1.1/manual/index.html) as well as show different materials per area.
+This microgame was created as a means to show and teach how different aspects of a game can be created. See the [Challenges](./Challenges.md) for some challenges to test your understanding!
 
-As of the Navigation Components 1.1.3, `NavMesh.CalculateTriangulation()` does not properly generate `NavMeshTriangulation.areas` per Navigation Area. Showing navigation areas therefore **only works if you build using the legacy system**, which does not support different navigation meshes per NavMeshAgent type.
+Tutorials covering all aspects of this game can be found on this [YouTube Playlist]()
 
-[![Youtube Tutorial](./Video%20Screenshot.jpg)](https://youtu.be/zxmz-LV6E6g)
+## Quickstart
+1. Open LlamAcademy/Minigolf/Scenes/Main Menu.unity
+2. Click play!
+
+## Recommended Build Targets
+1. WebGL
+2. Android
+3. iOS
+
+Others should also work, but the controls and UI are mobile-oriented so probably require some rework to be acceptable on other platforms.
 
 ## Supporters
-Have you been getting value out of these tutorials? Do you believe in LlamAcademy's mission of helping everyone make their game dev dream become a reality? Consider becoming a Patreon supporter and get your name added to this list, as well as other cool perks.
-Head over to the [LlamAcademy Patreon Page](https://patreon.com/llamacademy) or join as a [YouTube Member](https://www.youtube.com/channel/UCnWm6pMD38R1E2vCAByGb6w/join) to show your support.
+If you got value from this tutorial microgame consider becoming a Donation on Itch, or becoming a [Patreon Supporter](https://patreon.com/llamacademy), joining as a [YouTube Member](https://www.youtube.com/channel/UCnWm6pMD38R1E2vCAByGb6w/join), or even become a [GitHub Sponsor](https://github.com/sponsors/llamacademy) to show your support.
 
-### Phenomenal Supporter Tier
-* Andrew Bowen
-* YOUR NAME HERE!
+Supporters during the active lifespan of the microgame tutorial creation are shown below. Thank you all 🧡!
 
-### Tremendous Supporter Tier
-* Bruno Bozic
-* YOUR NAME HERE!
+## Phenomenal Supporters
+* **YOUR NAME** HERE!
+
+## Tremendous Supporters
+* **YOUR NAME** HERE!
 
 ### Awesome Supporter Tier
-* AudemKay
-* Matt Parkin
 * Ivan
-* Reulan
 * Iffy Obelus
-* Dwarf
-* YOUR NAME HERE!
+* Perry
+* Mustafa
+* **YOUR NAME** HERE!
 
 ### Supporters
 * Trey Briggs
@@ -35,19 +41,19 @@ Head over to the [LlamAcademy Patreon Page](https://patreon.com/llamacademy) or 
 * Dr Bash
 * Tarik
 * Sean
-* ag10g
 * Elijah Singer
-* Lurking Ninja
+* Bruno Bozic
 * Josh Meyer
 * Ewald Schulte
-* Dom C
 * Andrew Allbright
-* AudemKay
-* EJ
-* Claduiu Barsan-Pipu
-* Sschmeil22
+* AudemKay **x2**!
 * Ben
-* YOUR NAME HERE!
+* Christian Van Sttenwijk
+* Strange Swelter
+* Chimera Dev
+* Wendy Whitner
+* Lukas Wolfe
+* **YOUR NAME** HERE!
 
 ## Other Projects
 Interested in other Topics in Unity? 
@@ -55,14 +61,6 @@ Interested in other Topics in Unity?
 * [Check out the LlamAcademy YouTube Channel](https://youtube.com/c/LlamAcademy)!
 * [Check out the LlamAcademy GitHub for more projects](https://github.com/llamacademy)
 
-## Socials
-* [YouTube](https://youtube.com/c/LlamAcademy)
-* [Facebook](https://facebook.com/LlamAcademyOfficial)
-* [TikTok](https://www.tiktok.com/@llamacademy)
-* [Twitter](https://twitter.com/TheLlamAcademy)
-* [Instagram](https://www.instagram.com/llamacademy/)
-* [Reddit](https://www.reddit.com/user/LlamAcademyOfficial)
-
 ## Requirements
-* Requires Unity 2021.3 LTS or higher.
+* Likely works on Unity 2022 LTS or higher, but only tested on Unity 6.
 * Universal Render Pipeline
