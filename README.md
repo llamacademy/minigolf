@@ -1,10 +1,12 @@
 ﻿# Minigolf
 
-A 13-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
+![Minigolf Logo](./Assets/LlamAcademy/Minigolf/UI/Textures/Logo.png "Minigolf Logo")
+
+A 12-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
 
 This microgame was created as a means to show and teach how different aspects of a game can be created. See the [Challenges](./Challenges.md) for some challenges to test your understanding!
 
-Tutorials covering all aspects of this game can be found on this [YouTube Playlist]()
+Tutorials covering all aspects of this game can be found on this [YouTube Playlist](https://www.youtube.com/watch?v=plghFeXUKJM&list=PLllNmP7eq6TTXSowLN4hZRMmM2yKOiBEL)
 
 ## Quickstart
 1. Open LlamAcademy/Minigolf/Scenes/Main Menu.unity
@@ -39,21 +41,22 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 ### Supporters
 * Trey Briggs
 * Matt Sponholz
-* Dr Bash
 * Tarik
-* Sean
 * Elijah Singer
 * Bruno Bozic
-* Josh Meyer
 * Ewald Schulte
 * Andrew Allbright
-* AudemKay **x2**!
+* AudemKay
+* Josh Meyer
 * Ben
-* Christian Van Sttenwijk
+* Christiaan van Steenwijk
 * Strange Swelter
 * Chimera Dev
 * Wendy Whitner
 * Lukas Wolfe
+* Jason Hansen
+* Ralevum
+* angell
 * **YOUR NAME** HERE!
 
 ## Other Projects

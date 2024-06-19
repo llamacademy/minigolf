@@ -38,11 +38,19 @@ MonoBehaviour:
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
-    Position: {x: -2.5, y: 0, z: -2.5}
+    Position: {x: -3.5, y: 0, z: -1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
-    Position: {x: -2.5, y: 0, z: -3.5}
+    Position: {x: -3.5, y: 0, z: -2.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/All Grass
+    Position: {x: -3.5, y: 0, z: -3.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/All Grass
+    Position: {x: -3.5, y: 0, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
@@ -54,11 +62,11 @@ MonoBehaviour:
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
-    Position: {x: -0.5, y: 0, z: -4.5}
+    Position: {x: 0.5, y: 0, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
-    Position: {x: 0.5, y: 0, z: -4.5}
+    Position: {x: -0.5, y: 0, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/All Grass
@@ -125,6 +133,10 @@ MonoBehaviour:
     Position: {x: 3.5, y: 0, z: 1.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Back Long Variant
+    Position: {x: 0.5, y: 0, z: -2.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Right
     Position: {x: 1.5, y: 0, z: 0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
@@ -157,52 +169,36 @@ MonoBehaviour:
     Position: {x: 7.5, y: 0, z: -4.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: -0.5, y: 0, z: 0.5}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: 5.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: -3.5, y: 0, z: -1.5}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: -2.5, y: 0, z: -3.5}
+    Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: -2.5, y: 0, z: -2.5}
+    Rotation: {x: -0, y: 1, z: -0, w: -0.00000004371139}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: 5.5, y: 0, z: -2.5}
+    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Back
+    Position: {x: 4.5, y: 0, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: -3.5, y: 0, z: -2.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: -3.5, y: 0, z: -3.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: -3.5, y: 0, z: -4.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: 2.5, y: 0, z: 0.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: 2.5, y: 0, z: -0.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Left
-    Position: {x: 2.5, y: 0, z: -1.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back Long Variant
+  - PrefabResourcePath: Tiles/Wall Back
     Position: {x: 3.5, y: 0, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back Long Variant
-    Position: {x: 0.5, y: 0, z: -2.5}
+  - PrefabResourcePath: Tiles/Wall Back
+    Position: {x: -0.5, y: 0, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back Long Variant
-    Position: {x: 6.5, y: 0, z: -5.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back Long Variant
-    Position: {x: -2.5, y: 0, z: -5.5}
+  - PrefabResourcePath: Tiles/Wall Back
+    Position: {x: -1.5, y: 0, z: -2.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Back
@@ -237,7 +233,67 @@ MonoBehaviour:
     Position: {x: -1.5, y: 0, z: -5.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Back
+    Position: {x: -2.5, y: 0, z: -5.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Back Long Variant
+    Position: {x: -3.5, y: 0, z: -5.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Back Long Variant
+    Position: {x: 6.5, y: 0, z: -5.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: -4.5, y: 0, z: -4.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: -4.5, y: 0, z: -3.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: -4.5, y: 0, z: -2.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: -4.5, y: 0, z: -1.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: 2.5, y: 0, z: -0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: 2.5, y: 0, z: 0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left
+    Position: {x: -0.5, y: 0, z: 0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: -0.5, y: 0, z: -0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Left Long Variant
+    Position: {x: 2.5, y: 0, z: -1.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Front Long Variant
+    Position: {x: 6.5, y: 0, z: -0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Front
+    Position: {x: 5.5, y: 0, z: -0.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Interior Corner R
+    Position: {x: 4.5, y: 0, z: -0.5}
+    Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Front
     Position: {x: -2.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
@@ -245,52 +301,16 @@ MonoBehaviour:
     Position: {x: -1.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: 5.5, y: 0, z: -0.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Front Long Variant
-    Position: {x: 6.5, y: 0, z: -0.5}
+    Position: {x: -3.5, y: 0, z: -0.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner L
-    Position: {x: 4.5, y: 0, z: -0.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner R
-    Position: {x: -0.5, y: 0, z: -0.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner R
-    Position: {x: 5.5, y: 0, z: -3.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner L
+  - PrefabResourcePath: Tiles/Wall Front
     Position: {x: -1.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner L
-    Position: {x: -1.5, y: 0, z: -2.5}
-    Rotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Interior Corner R
-    Position: {x: 5.5, y: 0, z: -2.5}
-    Rotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-    Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: 4.5, y: 0, z: -3.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: 3.5, y: 0, z: -3.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: 2.5, y: 0, z: -3.5}
-    Rotation: {x: -0, y: -0, z: -0, w: 1}
-    Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: 1.5, y: 0, z: -3.5}
+    Position: {x: -0.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Front
@@ -298,23 +318,27 @@ MonoBehaviour:
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   - PrefabResourcePath: Tiles/Wall Front
-    Position: {x: -0.5, y: 0, z: -3.5}
+    Position: {x: 1.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back
-    Position: {x: -0.5, y: 0, z: -2.5}
+  - PrefabResourcePath: Tiles/Wall Front
+    Position: {x: 2.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
-  - PrefabResourcePath: Tiles/Wall Back
-    Position: {x: 4.5, y: 0, z: -2.5}
+  - PrefabResourcePath: Tiles/Wall Front
+    Position: {x: 3.5, y: 0, z: -3.5}
+    Rotation: {x: -0, y: -0, z: -0, w: 1}
+    Scale: {x: 1, y: 1, z: 1}
+  - PrefabResourcePath: Tiles/Wall Front
+    Position: {x: 4.5, y: 0, z: -3.5}
     Rotation: {x: -0, y: -0, z: -0, w: 1}
     Scale: {x: 1, y: 1, z: 1}
   Par:
   - Rating: 3
-    Strokes: 1
+    Strokes: 4
   - Rating: 2
-    Strokes: 2
+    Strokes: 6
   - Rating: 1
-    Strokes: 3
+    Strokes: 8
   - Rating: 0
-    Strokes: 5
+    Strokes: 11

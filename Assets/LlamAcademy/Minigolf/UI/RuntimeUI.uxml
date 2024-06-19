@@ -33,7 +33,7 @@
                 <ui:Label name="stars-0-par" text="5" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="power-image" style="position: absolute; top: 640px; left: 310px; width: 150px; background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/Power%20Triangle.png?fileID=2800000&amp;guid=571dcf9ee851f2d499e46e27b617b676&amp;type=3#Power Triangle&quot;);" />
+        <ui:VisualElement name="power-image" style="position: absolute; top: 640px; left: 285px; width: 150px; background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/Power%20Triangle.png?fileID=2800000&amp;guid=571dcf9ee851f2d499e46e27b617b676&amp;type=3#Power Triangle&quot;);" />
         <ui:Label name="level-label" text="Level X" class="header" />
         <ui:Button text="||" name="menu-button" class="secondary float-top-right" />
     </ui:VisualElement>
