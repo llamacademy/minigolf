@@ -12,7 +12,7 @@
         <ui:VisualElement class="rating-container">
             <ui:VisualElement class="current-strokes">
                 <ui:Label text="Strokes" />
-                <ui:Label name="current-strokes" text="0"/>
+                <ui:Label name="current-strokes" text="0" />
             </ui:VisualElement>
             <ui:VisualElement class="stars-3">
                 <ui:VisualElement name="stars-3-icon" class="icon" style="background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/rating-stars-3.png?fileID=-829819273&amp;guid=aef47515a452f9047a5499331f5f6333&amp;type=3#3-stars&quot;);" />
@@ -33,7 +33,8 @@
                 <ui:Label name="stars-0-par" text="5" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Label name="level-label" class="header" text="Level X"/>
+        <ui:VisualElement name="power-image" style="position: absolute; top: 640px; left: 310px; width: 150px; background-image: url(&quot;project://database/Assets/LlamAcademy/Minigolf/UI/Textures/Power%20Triangle.png?fileID=2800000&amp;guid=571dcf9ee851f2d499e46e27b617b676&amp;type=3#Power Triangle&quot;);" />
+        <ui:Label name="level-label" text="Level X" class="header" />
         <ui:Button text="||" name="menu-button" class="secondary float-top-right" />
     </ui:VisualElement>
 </ui:UXML>

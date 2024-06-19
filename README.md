@@ -1,6 +1,6 @@
 ﻿# Minigolf
 
-A 10-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
+A 13-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
 
 This microgame was created as a means to show and teach how different aspects of a game can be created. See the [Challenges](./Challenges.md) for some challenges to test your understanding!
 
@@ -8,6 +8,7 @@ Tutorials covering all aspects of this game can be found on this [YouTube Playli
 
 ## Quickstart
 1. Open LlamAcademy/Minigolf/Scenes/Main Menu.unity
+   1. Ensure you have a vertical aspect ratio for your game view (something like 9:16)
 2. Click play!
 
 ## Recommended Build Targets

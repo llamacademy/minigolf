@@ -3,7 +3,7 @@ using LlamAcademy.Minigolf.Bus;
 using LlamAcademy.Minigolf.Bus.Events;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace LlamAcademy.Minigolf
@@ -12,10 +12,12 @@ namespace LlamAcademy.Minigolf
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Rigidbody Ball;
-        [SerializeField] private Image PowerImage;
+        [SerializeField] private UIDocument RuntimeUI;
         [SerializeField] private float MaxForce;
         [SerializeField] private Gradient PowerGradient;
         [SerializeField] private CinemachineInputProvider RotationInputProvider;
+
+        private VisualElement PowerImage => RuntimeUI.rootVisualElement.Q("power-image");
 
         private Camera Camera;
         private int Putts = 0;
@@ -41,7 +43,7 @@ namespace LlamAcademy.Minigolf
         private void Start()
         {
             LastBallPosition = Ball.transform.position;
-            // TouchSimulation.Enable(); apparently doesn't work in Unity 6, but with monobehavior it does
+            // TouchSimulation.Enable(); apparently doesn't work in Unity 6, but with the TouchSimulation Monobehavior it does work.
             EventBus<BallExitedLevelBoundsEvent>.OnEvent += OnBallExitedLevelBounds;
             EventBus<BallSettledEvent>.OnEvent += OnBallSettled;
             EventBus<BallInHoleEvent>.OnEvent += OnBallInHoleEvent;
@@ -96,9 +98,9 @@ namespace LlamAcademy.Minigolf
         private void TouchOnFingerUp(Finger finger)
         {
             RotationInputProvider.enabled = false;
-            if (!ShouldShowPower || PowerImage.rectTransform.sizeDelta.magnitude < 0.01f) return;
+            if (!ShouldShowPower || PowerImage.style.height.value.value < 0.01f) return;
 
-            PowerImage.gameObject.SetActive(false);
+            PowerImage.AddToClassList("hidden");
 
             EventBus<PlayerStrokeEvent>.Raise(new PlayerStrokeEvent(Ball.transform.position, Putts));
             WaitingForBallToSettle = true;
@@ -114,8 +116,11 @@ namespace LlamAcademy.Minigolf
         {
             if (ShouldShowPower)
             {
-                PowerImage.rectTransform.sizeDelta = new Vector2(PowerImage.rectTransform.sizeDelta.x, GetForce(finger));
-                PowerImage.color = PowerGradient.Evaluate(PowerImage.rectTransform.sizeDelta.y / 100);
+                PowerImage.style.height = GetForce(finger);
+                // 1280 is canvas height configured on the UIDocument 1280 / 2 = 640 is center of screen
+                // If you choose a different scale mode other than "Shrink" or canvas size, this will change.
+                PowerImage.style.top = 640 - PowerImage.style.height.value.value;
+                PowerImage.style.unityBackgroundImageTintColor = PowerGradient.Evaluate(PowerImage.style.height.value.value / 100);
             }
         }
 
@@ -139,8 +144,8 @@ namespace LlamAcademy.Minigolf
             }
             ShouldShowPower = true;
 
-            PowerImage.gameObject.SetActive(true);
-            PowerImage.rectTransform.sizeDelta = new Vector2(PowerImage.rectTransform.sizeDelta.x, 0);
+            PowerImage.RemoveFromClassList("hidden");
+            PowerImage.style.height = 0;
         }
 
         private float GetForce(Finger finger) => Mathf.Clamp(InitialTouchPosition.y - finger.screenPosition.y, 0, 100);

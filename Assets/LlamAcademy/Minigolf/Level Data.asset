@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 888485e8c0634f4c8c922e8366cfd368, type: 3}
   m_Name: Level Data
   m_EditorClassIdentifier: 
-  Level: {fileID: 11400000, guid: 16f48ce9a40e7cd4fbcbb8ee9530c94b, type: 2}
+  Level: {fileID: 11400000, guid: 30ccd8e665933a44fa84858242bcb816, type: 2}
   AllLevels:
   - {fileID: 11400000, guid: 91af5df1cbddfeb46afd9931e3b82db5, type: 2}
   - {fileID: 11400000, guid: 74b42547fbaa57644838c8a1d7bd0db8, type: 2}
@@ -24,3 +24,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a250957d41637fd4c8f8caf54eaaadd8, type: 2}
   - {fileID: 11400000, guid: 0dcbc58beba549e47b73496628069376, type: 2}
   - {fileID: 11400000, guid: 91f5357a1e32f9a428f45c0ef698e5c6, type: 2}
+  - {fileID: 11400000, guid: 8ad1f7eae66243544afa24a1254c3a02, type: 2}
+  - {fileID: 11400000, guid: 81df05b7bd02c1242a495361008d9575, type: 2}
+  - {fileID: 11400000, guid: 30ccd8e665933a44fa84858242bcb816, type: 2}
