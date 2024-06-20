@@ -4,7 +4,7 @@
 
 A 12-hole minigolf microgame targeted for mobile use cases! Hosted free on [Itch.io page](https://llamacademy.itch.io/minigolf)
 
-This microgame was created as a means to show and teach how different aspects of a game can be created. See the [Challenges](./Challenges.md) for some challenges to test your understanding!
+This microgame was created as a means to show and teach how different aspects of a game can be created. See the [Challenges](./CHALLENGES.md) for some challenges to test your understanding!
 
 Tutorials covering all aspects of this game can be found on this [YouTube Playlist](https://www.youtube.com/watch?v=plghFeXUKJM&list=PLllNmP7eq6TTXSowLN4hZRMmM2yKOiBEL)
 
