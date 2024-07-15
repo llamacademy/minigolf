@@ -23,3 +23,4 @@ Please do not commit and create PRs with your implementation of these challenges
 - Gate new balls behind some currency that is awarded based on obtaining higher "Par" ratings.
 - Add a "retry shot" mechanic that allows the player to attempt their last putt. Maybe gate this behind some currency.
 - Change the lighting at runtime based on level so not all levels have the same ambience. Perhaps some levels are darker. Maybe it's raining on some levels.
+- Implement a more robust method of discarding "ghost" collision contacts than the simple override of the normal. Some [suggestions on algorithms can be found here](https://forum.unity.com/threads/experimental-contacts-modification-api.924809/page-2#post-6720985). 
