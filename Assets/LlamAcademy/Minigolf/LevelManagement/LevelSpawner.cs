@@ -56,7 +56,6 @@ namespace LlamAcademy.Minigolf.LevelManagement
             FindTilemap();
             ClearTilemap();
 
-            Dictionary<string, GameObject> preloadedResources = new();
             int tileCount = LevelData.Level.WorldObjectPositions.Count;
             float baseDelay = TotalAnimationTime / tileCount;
             int index = 0;
@@ -66,15 +65,7 @@ namespace LlamAcademy.Minigolf.LevelManagement
 
             foreach (PrefabSpawnData data in spawnData)
             {
-                GameObject prefab = null;
-                if (!preloadedResources.ContainsKey(data.PrefabResourcePath))
-                {
-                    prefab = Resources.Load<GameObject>(data.PrefabResourcePath);
-                }
-                else
-                {
-                    prefab = preloadedResources[data.PrefabResourcePath];
-                }
+                GameObject prefab = Resources.Load<GameObject>(data.PrefabResourcePath);
 
                 Vector3 spawnLocation = data.Position + Vector3.up * AnimateInCurve.Evaluate(0);
                 GameObject instance = Instantiate(prefab, spawnLocation, data.Rotation, Tilemap.transform);

@@ -106,7 +106,12 @@ namespace LlamAcademy.Minigolf.LevelManagement.Editor
             directoryPath = DirectoryInput?.value;
         }
 
-        private void OnFocus()
+        private void OnDestroy()
+        {
+            SceneView.duringSceneGui -= OnSceneGUI;
+        }
+
+        private void OnBecameVisible()
         {
             SceneView.duringSceneGui -= OnSceneGUI;
             SceneView.duringSceneGui += OnSceneGUI;
@@ -144,11 +149,6 @@ namespace LlamAcademy.Minigolf.LevelManagement.Editor
 
             Handles.color = Color.red;
             Handles.DrawWireCube(boundsInt.center, boundsInt.size);
-        }
-
-        private void OnDestroy()
-        {
-            SceneView.duringSceneGui -= OnSceneGUI;
         }
 
         private void FindTilemap(ClickEvent _ = null)

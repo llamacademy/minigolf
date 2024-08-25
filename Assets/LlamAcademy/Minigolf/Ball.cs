@@ -44,15 +44,15 @@ namespace LlamAcademy.Minigolf
 
         private void OnDestroy()
         {
-            Physics.ContactModifyEventCCD -= PreventGhostBumpsCCD;
+            Physics.ContactModifyEvent -= PreventGhostBumpsCCD;
         }
 
         private void PreventGhostBumpsCCD(PhysicsScene scene, NativeArray<ModifiableContactPair> contactPairs)
         {
             ModifiableContactPair[] ballContactPairs =
                 contactPairs.Where(pair => pair.colliderInstanceID == ColliderInstanceId).ToArray();
-            Debug.Log(
-                $"CCD Collision found: {contactPairs.Length} contact pairs. {ballContactPairs.Length} affecting the ball.");
+            // Debug.Log(
+            //     $"CCD Collision found: {contactPairs.Length} contact pairs. {ballContactPairs.Length} affecting the ball.");
 
             switch (BouncePreventionMode)
             {
@@ -67,14 +67,14 @@ namespace LlamAcademy.Minigolf
 
         private void SimpleBouncePrevention(ModifiableContactPair[] ballContactPairs)
         {
-            Debug.Log("Modifying contact pairs with simple bounce prevention algorithm.");
+            // Debug.Log("Modifying contact pairs with simple bounce prevention algorithm.");
             foreach (ModifiableContactPair pair in ballContactPairs)
             {
                 for (int i = 0; i < pair.contactCount; i++)
                 {
                     if (pair.GetSeparation(i) > 0)
                     {
-                        Debug.Log($"<color=#00ff00>Ignoring contact because separation of contact index {i} > 0</color>");
+                        // Debug.Log($"<color=#00ff00>Ignoring contact because separation of contact index {i} > 0</color>");
                         pair.SetNormal(i, Vector3.up);
                     }
                 }
