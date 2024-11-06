@@ -53,10 +53,14 @@ Material:
     m_Floats:
     - _Ball_AO: 0.25
     - _Density: 13
+    - _FresnelPower: 0.01
+    - _FresnelStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ShadowStrength: 0.75
     - _Steps: 5
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 0, g: 0, b: 0, a: 0}
+    - _GlowColor: {r: 0, g: 7.9622154, b: 10.680628, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
