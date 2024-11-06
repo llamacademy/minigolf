@@ -1,8 +1,8 @@
-using Cinemachine;
 using LlamAcademy.Minigolf.LevelManagement;
 using LlamAcademy.Minigolf.Persistence;
 using LlamAcademy.Minigolf.UI.Modals.About;
 using LlamAcademy.Minigolf.UI.Modals.LevelSelection;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
@@ -12,7 +12,7 @@ namespace LlamAcademy.Minigolf.UI
     [RequireComponent(typeof(UIDocument))]
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private CinemachineVirtualCamera VirtualCamera;
+        [SerializeField] private CinemachineCamera VirtualCamera;
         [SerializeField] [Range(0.1f, 5f)] private float RotationSpeed = 1f;
         /// <summary>
         /// Both MainMenu and Game scenes should refer to this same single SO so they can use it to pass data between
@@ -28,7 +28,7 @@ namespace LlamAcademy.Minigolf.UI
         private LevelSelection LevelSelectionModal;
         private About AboutModal;
         private HowToPlay TutorialModal;
-        private CinemachineOrbitalTransposer Transposer;
+        private CinemachineOrbitalFollow Transposer;
         private PlayerLevelCompletionData LevelCompletionData;
 
         private void Awake()
@@ -54,7 +54,7 @@ namespace LlamAcademy.Minigolf.UI
             TutorialModal = new HowToPlay(Document.rootVisualElement.Q<VisualElement>("tutorial"));
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
-            Transposer = VirtualCamera.GetCinemachineComponent<CinemachineOrbitalTransposer>();
+            Transposer = VirtualCamera.GetComponent<CinemachineOrbitalFollow>();
         }
 
         private void OnLevelSelected(LevelSO levelData)
@@ -65,7 +65,7 @@ namespace LlamAcademy.Minigolf.UI
 
         private void Update()
         {
-            Transposer.m_XAxis.Value += Time.deltaTime * RotationSpeed;
+            Transposer.HorizontalAxis.Value += Time.deltaTime * RotationSpeed;
         }
 
         private void ShowLevelPopup(ClickEvent _ = null)

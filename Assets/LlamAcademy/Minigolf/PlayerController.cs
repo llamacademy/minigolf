@@ -1,6 +1,6 @@
-using Cinemachine;
 using LlamAcademy.Minigolf.Bus;
 using LlamAcademy.Minigolf.Bus.Events;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem.EnhancedTouch;
 using UnityEngine.UIElements;
@@ -15,7 +15,7 @@ namespace LlamAcademy.Minigolf
         [SerializeField] private UIDocument RuntimeUI;
         [SerializeField] private float MaxForce;
         [SerializeField] private Gradient PowerGradient;
-        [SerializeField] private CinemachineInputProvider RotationInputProvider;
+        [SerializeField] private CinemachineInputAxisController RotationInputProvider;
 
         private VisualElement PowerImage => RuntimeUI.rootVisualElement.Q("power-image");
 
