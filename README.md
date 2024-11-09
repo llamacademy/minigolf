@@ -29,6 +29,7 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * **YOUR NAME** HERE!
 
 ## Tremendous Supporters
+* Nick5454
 * **YOUR NAME** HERE!
 
 ### Awesome Supporter Tier
@@ -36,6 +37,8 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * Iffy Obelus
 * Perry
 * Mustafa
+* Snedden
+* Angell
 * **YOUR NAME** HERE!
 
 ### Supporters
@@ -58,6 +61,8 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * Ralevum
 * angell
 * Warspawn
+* Repost
+* ANSTUDIO
 * **YOUR NAME** HERE!
 
 ## Other Projects
