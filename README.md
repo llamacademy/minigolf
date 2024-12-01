@@ -39,6 +39,7 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * Mustafa
 * Snedden
 * Angell
+* Pixel Wizards
 * **YOUR NAME** HERE!
 
 ### Supporters
@@ -61,8 +62,9 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * Ralevum
 * angell
 * Warspawn
-* Repost
+* repost
 * ANSTUDIO
+* Mike_H
 * **YOUR NAME** HERE!
 
 ## Other Projects
