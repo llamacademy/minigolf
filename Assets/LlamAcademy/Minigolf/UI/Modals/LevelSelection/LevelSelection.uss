@@ -6,6 +6,8 @@
 .container {
     height: 600px;
     width: 340px;
+    border-color: var(--secondary--light);
+    border-width: 4px;
 }
 
 Label {

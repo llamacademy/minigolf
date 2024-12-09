@@ -28,6 +28,7 @@ namespace LlamAcademy.Minigolf
             Collider.providesContacts = true;
             ColliderInstanceId = Collider.GetInstanceID();
 
+            Physics.ContactModifyEventCCD += PreventGhostBumpsCCD;
             Physics.ContactModifyEvent += PreventGhostBumpsCCD;
         }
 
@@ -44,6 +45,7 @@ namespace LlamAcademy.Minigolf
 
         private void OnDestroy()
         {
+            Physics.ContactModifyEventCCD -= PreventGhostBumpsCCD;
             Physics.ContactModifyEvent -= PreventGhostBumpsCCD;
         }
 
@@ -74,8 +76,9 @@ namespace LlamAcademy.Minigolf
                 {
                     if (pair.GetSeparation(i) > 0)
                     {
-                        // Debug.Log($"<color=#00ff00>Ignoring contact because separation of contact index {i} > 0</color>");
-                        pair.SetNormal(i, Vector3.up);
+                        // Debug.Log($"<color=#00ff00>Ignoring contact with {pair.otherColliderInstanceID} because separation of contact index {i} > 0</color>");
+                        pair.IgnoreContact(i);
+                        // pair.SetNormal(i, Vector3.up); // With Unity 6000.0.25f1 this is no longer working. Ignoring the contact gives similar results but does lose some bounce that didn't seem to previously happen.
                     }
                 }
             }

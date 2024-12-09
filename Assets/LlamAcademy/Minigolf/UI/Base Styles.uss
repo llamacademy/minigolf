@@ -147,6 +147,10 @@ Button.danger:hover:focus {
     background-color: var(--background--light);
 }
 
+.runtime-menu {
+    height: 700px;
+}
+
 .visible {
     opacity: 1;
     scale: 1;

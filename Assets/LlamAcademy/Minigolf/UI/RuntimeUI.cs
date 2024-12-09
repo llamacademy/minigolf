@@ -20,6 +20,7 @@ namespace LlamAcademy.Minigolf.UI
         private VisualElement MenuContainer => Document.rootVisualElement.Q("menu-container");
         private Button ResumeButton => Document.rootVisualElement.Q<Button>("resume-button");
         private Button ResetButton => Document.rootVisualElement.Q<Button>("reset-button");
+        private Button LevelSelectButton => Document.rootVisualElement.Q<Button>("level-selection-button");
         private Button NextLevelButton => Document.rootVisualElement.Q<Button>("next-level-button");
         private Button MainMenuButton => Document.rootVisualElement.Q<Button>("main-menu-button");
         private Button PauseButton => Document.rootVisualElement.Q<Button>("menu-button");
@@ -40,6 +41,7 @@ namespace LlamAcademy.Minigolf.UI
 
         private int CurrentStrokes = 0;
         private bool BallIsInHole = false;
+        private LevelSelection LevelSelectionModal;
 
         private Par PerfectRating;
         private Par GoodRating;
@@ -55,7 +57,15 @@ namespace LlamAcademy.Minigolf.UI
 
             LevelCompletionData = SavedDataService.LoadData();
 
+            LevelSelectionModal = new LevelSelection(
+                Document.rootVisualElement.Q<VisualElement>("level-selection"),
+                LevelData.AllLevels,
+                LevelCompletionData
+            );
+            LevelSelectionModal.OnLevelSelected += OnLevelSelected;
+
             ResumeButton.RegisterCallback<ClickEvent>(ResumeGame);
+            LevelSelectButton.RegisterCallback<ClickEvent>(ShowLevelSelection);
             NextLevelButton.RegisterCallback<ClickEvent>(GoToNextLevel);
             MainMenuButton.RegisterCallback<ClickEvent>(ReturnToMainMenu);
             PauseButton.RegisterCallback<ClickEvent>(ShowMenu);
@@ -201,6 +211,17 @@ namespace LlamAcademy.Minigolf.UI
             MenuContainer.pickingMode = PickingMode.Position;
 
             EventBus<PauseEvent>.Raise(new PauseEvent());
+        }
+
+        private void ShowLevelSelection(ClickEvent evt)
+        {
+            LevelSelectionModal.Show();
+        }
+
+        private void OnLevelSelected(LevelSO levelData)
+        {
+            LevelData.Level = levelData;
+            SceneManager.LoadScene(Constants.GAME_SCENE_NAME);
         }
 
         private void ResumeGame(ClickEvent evt)

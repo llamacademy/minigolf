@@ -12,7 +12,7 @@ namespace LlamAcademy.Minigolf.UI
     [RequireComponent(typeof(UIDocument))]
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private CinemachineCamera VirtualCamera;
+        [SerializeField] private CinemachineCamera CinemachineCamera;
         [SerializeField] [Range(0.1f, 5f)] private float RotationSpeed = 1f;
         /// <summary>
         /// Both MainMenu and Game scenes should refer to this same single SO so they can use it to pass data between
@@ -49,12 +49,16 @@ namespace LlamAcademy.Minigolf.UI
                 System.Array.Sort(LevelData.AllLevels, (a,b) => a.name.CompareTo(b.name));
             }
 
-            LevelSelectionModal = new LevelSelection(Document.rootVisualElement.Q<VisualElement>("level-selection"), LevelData.AllLevels, LevelCompletionData);
+            LevelSelectionModal = new LevelSelection(
+                Document.rootVisualElement.Q<VisualElement>("level-selection"),
+                LevelData.AllLevels,
+                LevelCompletionData
+            );
             AboutModal = new About(Document.rootVisualElement.Q<VisualElement>("about-game"));
             TutorialModal = new HowToPlay(Document.rootVisualElement.Q<VisualElement>("tutorial"));
             LevelSelectionModal.OnLevelSelected += OnLevelSelected;
 
-            Transposer = VirtualCamera.GetComponent<CinemachineOrbitalFollow>();
+            Transposer = CinemachineCamera.GetComponent<CinemachineOrbitalFollow>();
         }
 
         private void OnLevelSelected(LevelSO levelData)

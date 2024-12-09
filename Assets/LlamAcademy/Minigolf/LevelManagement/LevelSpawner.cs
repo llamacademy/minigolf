@@ -69,7 +69,7 @@ namespace LlamAcademy.Minigolf.LevelManagement
 
                 Vector3 spawnLocation = data.Position + Vector3.up * AnimateInCurve.Evaluate(0);
                 GameObject instance = Instantiate(prefab, spawnLocation, data.Rotation, Tilemap.transform);
-                instance.transform.localScale = Vector3.zero;
+                instance.transform.localScale = Vector3.one / 1000f;
 
                 StartCoroutine(AnimateIn(instance.transform, data.Scale, baseDelay * index));
                 index++;

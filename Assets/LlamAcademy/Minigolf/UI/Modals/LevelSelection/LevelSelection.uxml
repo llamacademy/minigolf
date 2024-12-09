@@ -1,4 +1,4 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=60c1de3a44d20fb4c90fe92e9a2976dd&amp;type=3#Main Menu" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uss?fileID=7433441132597879392&amp;guid=28a32da40f184743977fff22a848d0a9&amp;type=3#LevelSelection" />

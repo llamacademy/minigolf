@@ -1,9 +1,9 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="LevelSelectionModal" src="project://database/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uxml?fileID=9197481963319205126&amp;guid=c0995f9d09625334e97ad0eac81da881&amp;type=3#LevelSelection" />
+    <ui:Template name="AboutModal" src="project://database/Assets/LlamAcademy/Minigolf/UI/Modals/About/About.uxml?fileID=9197481963319205126&amp;guid=01dfda51ab15f9344981e0085688135d&amp;type=3#About" />
+    <ui:Template name="TutorialModal" src="project://database/Assets/LlamAcademy/Minigolf/UI/Modals/Tutorial/HowToPlay.uxml?fileID=9197481963319205126&amp;guid=284bd16b110041fe86150e2d5e152ca0&amp;type=3#HowToPlay" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Main%20Menu.uss?fileID=7433441132597879392&amp;guid=60c1de3a44d20fb4c90fe92e9a2976dd&amp;type=3#Main Menu" />
     <Style src="project://database/Assets/LlamAcademy/Minigolf/UI/Base%20Styles.uss?fileID=7433441132597879392&amp;guid=0d0835b97cc60224084fdff76cf3600d&amp;type=3#Base Styles" />
-    <ui:Template name="LevelSelectionModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/LevelSelection/LevelSelection.uxml" />
-    <ui:Template name="AboutModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/About/About.uxml" />
-    <ui:Template name="TutorialModal" src="/Assets/LlamAcademy/Minigolf/UI/Modals/Tutorial/HowToPlay.uxml" />
     <ui:VisualElement name="root" style="flex-grow: 1;">
         <ui:VisualElement name="menu-container" class="container">
             <ui:VisualElement name="logo" />
@@ -13,7 +13,7 @@
             <ui:Button text="Exit" name="exit-game-button" class="danger" />
         </ui:VisualElement>
         <ui:Instance template="LevelSelectionModal" name="level-selection" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
-        <ui:Instance template="AboutModal" name="about-game" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
-        <ui:Instance template="TutorialModal" name="tutorial" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;" />
+        <ui:Instance template="AboutModal" name="about-game" picking-mode="Ignore" enabled="true" style="width: 100%; height: 100%; position: absolute; opacity: 1;" />
+        <ui:Instance template="TutorialModal" name="tutorial" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute; opacity: 1;" />
     </ui:VisualElement>
 </ui:UXML>
