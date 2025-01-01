@@ -8,7 +8,6 @@ namespace LlamAcademy.Minigolf.UI
         protected bool HideOnAwake { get; set; }
         protected bool IsOverlay { get; set; }
         public VisualElement Root { get; protected set; }
-        public bool IsTransparent => IsOverlay;
         public bool IsHidden => Root.ClassListContains("hidden");
 
         public UIView() {}
@@ -21,12 +20,12 @@ namespace LlamAcademy.Minigolf.UI
         public virtual void Initialize(VisualElement root)
         {
             Root = root ?? throw new ArgumentNullException(nameof(root));
+            SetVisualElements();
+            RegisterButtonCallbacks();
             if (HideOnAwake)
             {
                 Hide();
             }
-            SetVisualElements();
-            RegisterButtonCallbacks();
         }
 
         /// <summary>

@@ -46,8 +46,6 @@ namespace LlamAcademy.Minigolf.UI.Components
 
         public override void Dispose()
         {
-            throw new System.NotImplementedException();
         }
-
     }
 }
