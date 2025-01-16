@@ -40,6 +40,8 @@ Supporters during the active lifespan of the microgame tutorial creation are sho
 * Snedden
 * Angell
 * Pixel Wizards
+* Will B
+* Trey Briggs
 * **YOUR NAME** HERE!
 
 ### Supporters
